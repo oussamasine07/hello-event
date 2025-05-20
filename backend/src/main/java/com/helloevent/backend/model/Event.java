@@ -28,6 +28,8 @@ public class Event {
     *       - add relationships
     * */
 
+    public Event () {}
+
     public Long getId() {
         return id;
     }
