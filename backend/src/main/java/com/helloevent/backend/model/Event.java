@@ -2,6 +2,8 @@ package com.helloevent.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "events")
 public class Event {
@@ -18,6 +20,9 @@ public class Event {
 
     @Column(name = "place", nullable = false)
     private String place;
+
+    @Column(name = "event_date")
+    private Date eventDate;
 
     @Column(name = "number_of_places", nullable = false)
     private int numberOfPlaces;
