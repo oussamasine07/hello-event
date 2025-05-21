@@ -27,9 +27,11 @@ public class Event {
     @Column(name = "number_of_places", nullable = false)
     private int numberOfPlaces;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     /*
     * TODO
-    *       - add status enum(opened, closed)
     *       - add relationships
     * */
 

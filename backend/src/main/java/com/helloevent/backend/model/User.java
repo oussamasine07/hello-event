@@ -24,7 +24,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // todo add role
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
     // todo: make relationships here
