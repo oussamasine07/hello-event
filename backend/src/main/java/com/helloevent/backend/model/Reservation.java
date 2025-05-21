@@ -17,6 +17,14 @@ public class Reservation {
     @Column(name = "date_of_reservation", nullable = false)
     private Date dateOfReservation;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+
     public Long getId() {
         return id;
     }

@@ -3,6 +3,7 @@ package com.helloevent.backend.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -28,12 +29,23 @@ public class Event {
     private int numberOfPlaces;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
 
     /*
     * TODO
     *       - add relationships
     * */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "event")
+    private List<Reservation> reservations;
 
     public Event () {}
 

@@ -2,6 +2,8 @@ package com.helloevent.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,10 +27,16 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
 
     // todo: make relationships here
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
 
     public User () {}
 
