@@ -32,10 +32,7 @@ public class Event {
     @Column(nullable = false)
     private Status status;
 
-    /*
-    * TODO
-    *       - add relationships
-    * */
+    // Relationships
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -15,6 +15,7 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
+    // Relationships
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 

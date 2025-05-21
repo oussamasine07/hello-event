@@ -17,6 +17,7 @@ public class Reservation {
     @Column(name = "date_of_reservation", nullable = false)
     private Date dateOfReservation;
 
+    // Relationships
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

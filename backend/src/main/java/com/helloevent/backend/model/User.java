@@ -30,8 +30,7 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-
-    // todo: make relationships here
+    // Relationships
     @OneToMany(mappedBy = "user")
     private List<Event> events;
 
