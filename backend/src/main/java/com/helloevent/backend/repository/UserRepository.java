@@ -3,6 +3,12 @@ package com.helloevent.backend.repository;
 import com.helloevent.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+    @Override
+    Optional<User> findById(Long aLong);
+    User findUserByEmail(String email);
+
+    User findUserByUsername(String username);
 }
