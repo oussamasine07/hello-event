@@ -29,4 +29,22 @@ public class CategoryController {
         return categoryService.createCategory(category, token);
     }
 
+    @PutMapping("/{id}")
+    public Category update (@RequestBody Category category, @RequestHeader("Authorization") String token, @PathVariable Long id) {
+        return categoryService.updateCategory(category, token, id);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

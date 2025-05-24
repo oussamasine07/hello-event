@@ -44,6 +44,20 @@ public class CategoryService {
 
     }
 
+    public Category updateCategory ( Category category, String token, Long id ) {
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        if (user.getRole() == Role.ADMIN) {
+            Category updatedCategory = categoryRepository.findById(id).orElseThrow();
+            updatedCategory.setName(category.getName());
+
+            return categoryRepository.save(updatedCategory);
+        } else {
+            throw new Error("unauthorozied action");
+        }
+    }
+
 
 
 }
