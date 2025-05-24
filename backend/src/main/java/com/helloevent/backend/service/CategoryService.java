@@ -7,6 +7,8 @@ import com.helloevent.backend.repository.CategoryRepository;
 import com.helloevent.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -24,6 +26,10 @@ public class CategoryService {
         this.userRepository = userRepository;
 
         this.jwtService = jwtService;
+    }
+
+    public List<Category> getAllCategories () {
+        return categoryRepository.findAll();
     }
 
     public Category createCategory ( Category category, String token) {

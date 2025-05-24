@@ -19,6 +19,11 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping
+    public List<Category> index () {
+        return categoryService.getAllCategories();
+    }
+
     @PostMapping
     public Category create (@RequestBody Category category, @RequestHeader("Authorization") String token) {
         return categoryService.createCategory(category, token);
