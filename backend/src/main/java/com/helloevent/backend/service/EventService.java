@@ -99,6 +99,24 @@ public class EventService {
         }
     }
 
+    public void deleteEvent ( String token, Long id ) {
+        // get signin user from token
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+
+        // get user
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        // check user role
+        if (user.getRole() == Role.ADMIN) {
+
+            eventRepository.deleteById(id);
+
+        } else {
+            System.out.println("unauthoriezed action");
+            throw new Error("unauthoriezed action");
+        }
+    }
+
 }
 
 

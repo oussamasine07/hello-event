@@ -41,6 +41,10 @@ public class EventController {
         return eventService.updateEvent(event, token, id);
     }
 
+    @DeleteMapping("/{id}")
+    public void delete (@RequestHeader("Authorization") String token, @PathVariable Long id) {
+        eventService.deleteEvent(token, id);
+    }
 
 
 }
