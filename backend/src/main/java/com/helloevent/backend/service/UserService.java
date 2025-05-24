@@ -42,9 +42,9 @@ public class UserService {
                         )
                 );
 
-        if (authentication.isAuthenticated())
-            return jwtService.generateJwtToken(user.getUsername());
-
+        if (authentication.isAuthenticated()){
+            return jwtService.generateJwtToken(user);
+        }
 
         return "Fails";
     }

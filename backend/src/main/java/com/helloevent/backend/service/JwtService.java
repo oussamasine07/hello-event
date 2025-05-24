@@ -1,5 +1,6 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -56,13 +57,30 @@ public class JwtService {
 
     }
 
-    public String generateJwtToken (String username) {
+    public boolean validateToken(String token, UserDetails userDetails) {
+        final String username = extarctUsername(token);
+
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public boolean isTokenExpired( String token ) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extarctClaims(token, Claims::getExpiration);
+    }
+
+    public String generateJwtToken (User user) {
+        System.out.println(user.getId());
+        System.out.println(user.getUsername());
+
         Map<String, Object> claims = new HashMap<>();
 
         return Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(username)
+                .subject(user.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 60 * 40))
                 .and()
@@ -71,8 +89,6 @@ public class JwtService {
 
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
-    }
+
 
 }
