@@ -26,9 +26,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         User user = userRepository.getUserByUsernameOrByEmail(usernameOrEmail);
 
-        System.out.println("*********************************************");
-        System.out.println(user.toString());
-        System.out.println("*********************************************");
+//        System.out.println("*********************************************");
+//        System.out.println(user.toString());
+//        System.out.println("*********************************************");
 
         if ( user == null ) {
             System.out.println("user not found");
