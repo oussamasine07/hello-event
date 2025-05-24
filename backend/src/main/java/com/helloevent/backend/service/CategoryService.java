@@ -32,6 +32,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Category getCategoryById ( Long id ) {
+        return categoryRepository.findById(id).orElseThrow();
+    }
+
     public Category createCategory ( Category category, String token) {
         String usernameFromToken = jwtService.extarctUsername(token.substring(7));
         User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
