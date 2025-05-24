@@ -34,6 +34,11 @@ public class CategoryController {
         return categoryService.updateCategory(category, token, id);
     }
 
+    @DeleteMapping("/{id}")
+    public void delete (@RequestHeader("Authorization") String token, @PathVariable Long id) {
+        categoryService.deleteCategory(token, id);
+    }
+
 }
 
 

@@ -58,6 +58,17 @@ public class CategoryService {
         }
     }
 
+    public void deleteCategory (String token, Long id) {
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        if (user.getRole() == Role.ADMIN) {
+             categoryRepository.deleteById(id);
+        } else {
+            throw new Error("unauthorozied action");
+        }
+    }
+
 
 
 }
