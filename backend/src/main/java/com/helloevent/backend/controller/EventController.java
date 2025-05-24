@@ -36,6 +36,11 @@ public class EventController {
         return eventService.createNewEvent(event, token);
     }
 
+    @PutMapping("/{id}")
+    public Event update (@RequestBody EventDTO event, @RequestHeader("Authorization") String token, @PathVariable Long id) {
+        return eventService.updateEvent(event, token, id);
+    }
+
 
 
 }

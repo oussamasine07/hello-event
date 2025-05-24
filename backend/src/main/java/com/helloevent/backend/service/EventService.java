@@ -69,7 +69,35 @@ public class EventService {
         }
     }
 
+    public Event updateEvent (EventDTO event, String token, Long id) {
+        // get signin user from token
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
 
+        // get user
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        // todo add category
+
+        // check user role
+        if (user.getRole() == Role.ADMIN) {
+
+            Event newEvent = eventRepository.findById(id).orElseThrow();
+
+            newEvent.setName(event.name());
+            newEvent.setDescription(event.description());
+            newEvent.setPlace(event.place());
+            newEvent.setNumberOfPlaces(event.numberOfPlaces());
+            newEvent.setEventDate(event.eventDate());
+            newEvent.setUser(user);
+            newEvent.setStatus(event.status());
+
+            return eventRepository.save(newEvent);
+
+        } else {
+            System.out.println("unauthoriezed action");
+            throw new Error("unauthoriezed action");
+        }
+    }
 
 }
 
