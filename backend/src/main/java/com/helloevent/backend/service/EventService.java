@@ -1,6 +1,7 @@
 package com.helloevent.backend.service;
 
 import com.helloevent.backend.dto.EventDTO;
+import com.helloevent.backend.model.Category;
 import com.helloevent.backend.model.Event;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
@@ -18,16 +19,20 @@ public class EventService {
     private final UserRepository userRepository;
 
     private final JwtService jwtService;
+    private final CategoryService categoryService;
 
 
     public EventService (
             final EventRepository eventRepository,
             final UserRepository userRepository,
-            final JwtService jwtService
+
+            final CategoryService categoryService,
+            final JwtService jwtService, CategoryService categoryService1
     ) {
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.categoryService = categoryService1;
     }
 
     public List<Event> listAllEvents () {
@@ -46,7 +51,7 @@ public class EventService {
         // get user
         User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
 
-        // todo add category
+        Category category = categoryService.getCategoryById(event.category_id());
 
         // check user role
         if (user.getRole() == Role.ADMIN) {
@@ -60,6 +65,7 @@ public class EventService {
             newEvent.setEventDate(event.eventDate());
             newEvent.setUser(user);
             newEvent.setStatus(event.status());
+            newEvent.setCategory(category);
 
             return eventRepository.save(newEvent);
 
