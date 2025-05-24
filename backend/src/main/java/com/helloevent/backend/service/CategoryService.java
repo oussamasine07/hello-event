@@ -1,8 +1,43 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.model.Category;
+import com.helloevent.backend.model.Role;
+import com.helloevent.backend.model.User;
+import com.helloevent.backend.repository.CategoryRepository;
+import com.helloevent.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
+
+    private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+
+    private final JwtService jwtService;
+
+    public CategoryService (
+            final CategoryRepository categoryRepository,
+            final UserRepository userRepository,
+            final JwtService jwtService
+    ) {
+        this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
+
+        this.jwtService = jwtService;
+    }
+
+    public Category createCategory ( Category category, String token) {
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        if (user.getRole() == Role.ADMIN) {
+            return categoryRepository.save(category);
+        } else {
+            throw new Error("unauthorozied action");
+        }
+
+    }
+
+
 
 }
