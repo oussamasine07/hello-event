@@ -3,6 +3,7 @@ package com.helloevent.backend.service;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
@@ -63,6 +65,17 @@ public class UserService {
             throw new Error("unauthorized action");
         }
 
+    }
+
+    public void deleteClient (String token, Long id) {
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        if (user.getRole() == Role.ADMIN) {
+            userRepository.deleteClient(id);
+        } else {
+            throw new Error("unauthorized action");
+        }
     }
 
 }

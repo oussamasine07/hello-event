@@ -24,6 +24,11 @@ public class AdminController {
         return userService.showAllClients(token);
     }
 
+    @DeleteMapping("/clients/{id}")
+    public void deleteClient (@RequestHeader("Authorization") String token, @PathVariable Long id) {
+        userService.deleteClient(token, id);
+    }
+
 }
 
 

@@ -2,6 +2,7 @@ package com.helloevent.backend.repository;
 
 import com.helloevent.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -16,5 +17,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select * from users where role = 'CLIENT'", nativeQuery = true)
     List<User> getAllClients();
+
+    @Modifying
+    @Query(value = "delete from users where role = 'CLIENT' and id = ?", nativeQuery = true)
+    void deleteClient(Long id);
 
 }
