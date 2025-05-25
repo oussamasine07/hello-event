@@ -1,5 +1,6 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,6 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -49,5 +52,33 @@ public class UserService {
         return "Fails";
     }
 
+    public List<User> showAllClients (String token) {
+
+        String usernameFromToken = jwtService.extarctUsername(token.substring(7));
+        User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
+
+        if (user.getRole() == Role.ADMIN) {
+            return userRepository.getAllClients();
+        } else {
+            throw new Error("unauthorized action");
+        }
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
