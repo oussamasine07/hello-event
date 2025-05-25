@@ -17,6 +17,13 @@ public class Reservation {
     @Column(name = "date_of_reservation", nullable = false)
     private Date dateOfReservation;
 
+    @PrePersist
+    protected void onCreate() {
+        if (dateOfReservation == null) {
+            dateOfReservation = new Date();
+        }
+    }
+
     // Relationships
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -48,5 +55,21 @@ public class Reservation {
 
     public void setDateOfReservation(Date dateOfReservation) {
         this.dateOfReservation = dateOfReservation;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

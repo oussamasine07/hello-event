@@ -123,6 +123,15 @@ public class EventService {
         }
     }
 
+    public void decrementNumberOfPlaces (Long id) {
+
+        Event event = eventRepository.findById(id).orElseThrow();
+        event.setNumberOfPlaces(event.getNumberOfPlaces() - 1 );
+
+        eventRepository.save(event);
+
+    }
+
 }
 
 
