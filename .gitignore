@@ -32,3 +32,49 @@ backend/!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+
+### ignore frontend ###
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/frontend/dist
+/frontend/tmp
+/frontend/out-tsc
+/frontend/bazel-out
+
+# Node
+/frontend/node_modules
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+
+
+# Miscellaneous
+/frontend/.angular/cache
+/frontend/.sass-cache/
+/frontend/connect.lock
+/frontend/coverage
+/frontend/libpeerconnection.log
+/frontend/testem.log
+/frontend/typings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
