@@ -6,50 +6,56 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form class="register-form">
+      <form class="register-form" #registerForm (ngSubmit)="onRegisterSubmit(registerForm)" >
         <div class="name-fields">
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
-            <input matInput placeholder="Enter your first name">
+            <input matInput placeholder="Enter your first name" name="first_name" [(ngModel)]="registerFormObj.first_name">
             <mat-icon matPrefix>person</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input matInput placeholder="Enter your last name">
+            <input matInput placeholder="Enter your last name" name="last_name" [(ngModel)]="registerFormObj.last_name">
             <mat-icon matPrefix>person</mat-icon>
           </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" placeholder="Enter your username" name="username" [(ngModel)]="registerFormObj.username">
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email">
+          <input matInput type="email" placeholder="Enter your email" name="email" [(ngModel)]="registerFormObj.email">
           <mat-icon matPrefix>email</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="registerFormObj.password">
           <mat-icon matPrefix>lock</mat-icon>
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Confirm Password</mat-label>
-          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'">
-          <mat-icon matPrefix>lock</mat-icon>
-          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
-            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-        </mat-form-field>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Confirm Password</mat-label>-->
+<!--          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'">-->
+<!--          <mat-icon matPrefix>lock</mat-icon>-->
+<!--          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">-->
+<!--            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-form-field>-->
 
-        <div class="terms-section">
-          <mat-checkbox color="primary">
-            I accept the Terms and Conditions
-          </mat-checkbox>
-        </div>
+<!--        <div class="terms-section">-->
+<!--          <mat-checkbox color="primary">-->
+<!--            I accept the Terms and Conditions-->
+<!--          </mat-checkbox>-->
+<!--        </div>-->
 
         <button mat-raised-button color="primary" type="submit" class="submit-button">
           Create Account
