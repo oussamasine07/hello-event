@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h1 class="sidebar-title">MyApp</h1>
+  </div>
+
+  <mat-nav-list class="nav-list">
+    <a mat-list-item *ngFor="let item of menuItems"
+       [routerLink]="item.route"
+       routerLinkActive="active">
+      <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+      <span matListItemTitle>{{ item.label }}</span>
+    </a>
+  </mat-nav-list>
+
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar">
+        <span>JS</span>
+      </div>
+      <div class="user-details">
+        <span class="user-name">John Smith</span>
+        <span class="user-role">Administrator</span>
+      </div>
+    </div>
+  </div>
+</div>

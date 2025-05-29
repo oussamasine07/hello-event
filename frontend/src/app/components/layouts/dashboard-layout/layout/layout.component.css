@@ -1,0 +1,38 @@
+.layout-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f8fafc;
+}
+
+.layout-sidenav {
+  border-right: none;
+  background-color: #1e293b;
+}
+
+.layout-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-content {
+  padding: 2rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+::ng-deep .mat-drawer-container {
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-content {
+  height: 100%;
+  overflow: hidden;
+}
+
+::ng-deep .mat-sidenav {
+  width: 280px;
+}
