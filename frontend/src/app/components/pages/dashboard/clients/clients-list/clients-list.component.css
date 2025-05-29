@@ -1,0 +1,120 @@
+.clients-container {
+  padding: 1rem;
+}
+
+mat-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  background-color: white;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 0;
+}
+
+.header-actions {
+  margin-left: auto;
+}
+
+mat-card-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+mat-card-content {
+  padding: 1.5rem 2rem;
+}
+
+.clients-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table styles */
+::ng-deep .mat-mdc-table {
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.875rem;
+  padding: 1rem !important;
+}
+
+::ng-deep .mat-mdc-cell {
+  color: #1e293b;
+  padding: 1rem !important;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background: #f8fafc;
+}
+
+/* Column widths */
+.mat-column-id {
+  width: 80px;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-column-email {
+  min-width: 200px;
+}
+
+/* Button in header */
+button[mat-raised-button] {
+  height: 42px;
+  min-width: 120px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button[mat-raised-button] mat-icon {
+  margin-right: 8px;
+}
+
+/* Action buttons in table */
+button[mat-icon-button] {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .clients-container {
+    padding: 0.5rem;
+  }
+
+  mat-card-header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  mat-card-title {
+    font-size: 1.5rem;
+  }
+
+  mat-card-content {
+    padding: 1rem;
+  }
+
+  /* Hide less important columns on mobile */
+  .mat-column-id {
+    display: none;
+  }
+}

@@ -8,6 +8,7 @@ import {
 import {EventListComponent} from './components/pages/dashboard/events/event-list/event-list.component';
 
 import {EventFormComponent} from './components/pages/dashboard/events/event-form/event-form.component';
+import {ClientsListComponent} from './components/pages/dashboard/clients/clients-list/clients-list.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
       {
         path: "create-event",
         component: EventFormComponent
+      },
+      {
+        path: "clients",
+        component: ClientsListComponent
       }
     ]
   }
