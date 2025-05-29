@@ -5,8 +5,7 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    MatSlideToggle
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
