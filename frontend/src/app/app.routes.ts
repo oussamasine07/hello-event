@@ -5,6 +5,7 @@ import {LayoutComponent} from './components/layouts/dashboard-layout/layout/layo
 import {
   ListCategoriesComponent
 } from './components/pages/dashboard/categories/list-categories/list-categories.component';
+import {EventListComponent} from './components/pages/dashboard/events/event-list/event-list.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
       {
         path: "categories",
         component: ListCategoriesComponent
+      },
+      {
+        path: "events",
+        component: EventListComponent
       }
     ]
   }

@@ -1,0 +1,82 @@
+.events-container {
+  padding: 1rem;
+}
+
+mat-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  margin-left: auto;
+}
+
+mat-card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+mat-card-content {
+  padding: 0 1rem 1rem 1rem;
+}
+
+.events-table {
+  width: 100%;
+}
+
+.mat-column-id {
+  width: 80px;
+}
+
+.mat-column-date {
+  width: 150px;
+}
+
+.mat-column-numberOfPlaces {
+  width: 120px;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+/* Table styles */
+::ng-deep .mat-mdc-table {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+::ng-deep .mat-mdc-cell {
+  color: #1e293b;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background: #f8fafc;
+}
+
+/* Button in header */
+button[mat-raised-button] {
+  height: 36px;
+}
+
+button[mat-raised-button] mat-icon {
+  margin-right: 8px;
+}
