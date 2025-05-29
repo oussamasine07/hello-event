@@ -7,6 +7,8 @@ import {
 } from './components/pages/dashboard/categories/list-categories/list-categories.component';
 import {EventListComponent} from './components/pages/dashboard/events/event-list/event-list.component';
 
+import {EventFormComponent} from './components/pages/dashboard/events/event-form/event-form.component';
+
 export const routes: Routes = [
   {
     path: "register",
@@ -27,6 +29,10 @@ export const routes: Routes = [
       {
         path: "events",
         component: EventListComponent
+      },
+      {
+        path: "create-event",
+        component: EventFormComponent
       }
     ]
   }

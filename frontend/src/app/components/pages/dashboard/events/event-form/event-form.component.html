@@ -1,0 +1,55 @@
+<mat-card class="event-form-card">
+  <mat-card-header>
+    <mat-card-title>Add New Event</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="event-form">
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Event Name</mat-label>
+          <input matInput placeholder="Enter event name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Place</mat-label>
+          <input matInput placeholder="Enter event location">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Number of Places</mat-label>
+          <input matInput type="number" placeholder="Enter number of available places">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select>
+            <mat-option [value]="1">Electronics</mat-option>
+            <mat-option [value]="2">Clothing</mat-option>
+            <mat-option [value]="3">Books</mat-option>
+            <mat-option [value]="4">Sports</mat-option>
+            <mat-option [value]="5">Home & Garden</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="full-width">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Enter event description" rows="4"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button mat-button color="warn" type="button">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">Save Event</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
