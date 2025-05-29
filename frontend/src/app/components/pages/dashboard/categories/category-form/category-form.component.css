@@ -1,0 +1,31 @@
+.category-form-card {
+  background-color: white;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.category-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-actions {
+  padding: 0 1rem 1rem;
+  gap: 1rem;
+}
+
+mat-form-field {
+  flex: 1;
+  margin-bottom: -1.25em; /* Removes extra bottom spacing from form field */
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-sidebare',
@@ -9,7 +10,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
     MatListModule,
     MatIconModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NgFor
   ],
   templateUrl: './sidebare.component.html',
   styleUrl: './sidebare.component.css'
