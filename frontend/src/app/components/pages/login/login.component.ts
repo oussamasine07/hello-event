@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,10 +21,12 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   hidePassword = true;
 
   router = inject(Router);
+
+  token: string | null = localStorage.getItem("token");
 
   authService = inject(AuthService)
 
@@ -34,20 +36,20 @@ export class LoginComponent {
   }
 
   onLoginFormSubmit (form: FormsModule) {
-
     this.authService.loginClient(this.loginFormObj).subscribe({
       next: (res: string) => {
         localStorage.setItem("token", res)
       }
     })
-
     this.loginFormObj = {
       username: "",
       password: ""
     }
-
     this.router.navigate(["/dashboard"])
+  }
 
+  ngOnInit() {
+    this.authService.redirectIfLoggedIn( this.token )
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
@@ -27,11 +27,12 @@ import {routes} from '../../../app.routes';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   hidePassword = true;
   hideConfirmPassword = true;
 
   router = inject(Router)
+  token: string | null = localStorage.getItem("token");
 
   authService = inject(AuthService)
   registerFormObj = {
@@ -40,6 +41,10 @@ export class RegisterComponent {
     username: "",
     email: "",
     password: ""
+  }
+
+  ngOnInit() {
+    this.authService.redirectIfLoggedIn( this.token )
   }
 
   onRegisterSubmit (form: FormsModule) {
