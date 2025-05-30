@@ -10,7 +10,7 @@
 <!--      </div>-->
 <!--    </mat-card-header>-->
 
-    <app-category-form></app-category-form>
+    <app-category-form (categoryEventEmitter)="addCategory($event)" ></app-category-form>
 
     <mat-card-content>
       <table mat-table [dataSource]="categories ?? []" class="categories-table">

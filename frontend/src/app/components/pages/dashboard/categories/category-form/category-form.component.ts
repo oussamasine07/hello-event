@@ -1,10 +1,10 @@
-import {Component, inject} from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {CategoryService} from '../../../../../services/category/category.service';
 import {Category} from '../../../../../intefaces/category';
 
@@ -23,17 +23,20 @@ import {Category} from '../../../../../intefaces/category';
 })
 export class CategoryFormComponent {
 
+  @Output() categoryEventEmitter: EventEmitter<Category> = new EventEmitter();
+
   categoryServcie = inject(CategoryService);
 
   categoryObj = {
     name: "",
     type: "create"
   }
-  onSubmitCategory ( form: FormsModule ) {
+  onSubmitCategory ( form: NgForm ) {
+
 
     this.categoryServcie.postOrUpdateCategory(this.categoryObj).subscribe({
       next: ( createdCategory: Category ) => {
-        this.categoryServcie.addCategory(createdCategory);
+        this.categoryEventEmitter.emit( createdCategory );
       }
     })
 

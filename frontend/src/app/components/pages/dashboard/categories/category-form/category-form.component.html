@@ -3,7 +3,7 @@
     <mat-card-title>Add New Category</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="category-form" #formCategory (ngSubmit)="onSubmitCategory(formCategory)" >
+    <form class="category-form" #formCategory="ngForm" (ngSubmit)="onSubmitCategory(formCategory)" >
       <mat-form-field appearance="outline">
         <mat-label>Category Name</mat-label>
         <input hidden type="text" name="type" value="create" [(ngModel)]="categoryObj.type">

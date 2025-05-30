@@ -20,24 +20,22 @@ import {Category} from '../../../../../intefaces/category';
   styleUrl: './list-categories.component.css'
 })
 export class ListCategoriesComponent implements OnInit {
-  categories: Category[] | null | undefined = [];
+  categories: Category[] = [];
 
   categoryService = inject(CategoryService)
 
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
   ngOnInit() {
-    this.categoryService.category.subscribe({
-      next: (category: Category) => {
-        this.categories?.push(category)
-      }
-    })
-
     this.categoryService.getAllCategories().subscribe({
-      next: (categories: Category[]) => {
+      next: ( categories: Category[] ) => {
         this.categories = categories;
       }
     })
+  }
+
+  addCategory ( category: Category ) {
+    this.categories = [...this.categories, category];
   }
 
   onEditClick ( id: number ) {
