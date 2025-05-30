@@ -13,7 +13,7 @@
     <app-category-form></app-category-form>
 
     <mat-card-content>
-      <table mat-table [dataSource]="categories" class="categories-table">
+      <table mat-table [dataSource]="categories ?? []" class="categories-table">
         <!-- ID Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ID</th>

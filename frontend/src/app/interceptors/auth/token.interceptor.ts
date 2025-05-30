@@ -7,6 +7,8 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req)
   }
 
+  console.log(token)
+
   const newReq = req.clone({
     setHeaders: {
       Authorization: `Bearer ${token}`
