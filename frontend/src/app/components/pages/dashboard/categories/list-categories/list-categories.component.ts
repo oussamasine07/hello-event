@@ -27,13 +27,44 @@ export class ListCategoriesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
   ngOnInit() {
+    this.categoryService.category.subscribe({
+      next: (category: Category) => {
+        this.categories?.push(category)
+      }
+    })
+
     this.categoryService.getAllCategories().subscribe({
       next: (categories: Category[]) => {
         this.categories = categories;
-
-        console.log(this.categories)
       }
     })
   }
 
+  onEditClick ( id: number ) {
+    console.log(id)
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

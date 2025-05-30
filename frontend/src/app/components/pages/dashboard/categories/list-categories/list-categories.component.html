@@ -30,7 +30,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let category">
-            <button mat-icon-button color="primary" title="Edit">
+            <button (click)="onEditClick( category.id )" mat-icon-button color="primary" title="Edit">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="warn" title="Delete">

@@ -3,18 +3,19 @@
     <mat-card-title>Add New Category</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="category-form">
+    <form class="category-form" #formCategory (ngSubmit)="onSubmitCategory(formCategory)" >
       <mat-form-field appearance="outline">
         <mat-label>Category Name</mat-label>
-        <input matInput placeholder="Enter category name">
+        <input hidden type="text" name="type" value="create" [(ngModel)]="categoryObj.type">
+        <input matInput placeholder="Enter category name" name="name" [(ngModel)]="categoryObj.name" >
       </mat-form-field>
       <div class="form-actions">
-        <button mat-raised-button color="primary" type="submit">Add Category</button>
+        <button mat-raised-button color="primary" type="submit">Save Category</button>
       </div>
     </form>
   </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-button color="warn" type="button">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Save</button>
-  </mat-card-actions>
+<!--  <mat-card-actions align="end">-->
+<!--    <button mat-button color="warn" type="button">Cancel</button>-->
+<!--    <button mat-raised-button color="primary" type="submit">Save</button>-->
+<!--  </mat-card-actions>-->
 </mat-card>
