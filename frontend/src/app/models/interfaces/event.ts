@@ -1,12 +1,12 @@
 import {Category} from './category';
 
-export interface Event {
-  id: number,
+export interface EventInterface {
+  id: number | null,
   name: string,
   description: string,
   place: string,
   eventDate: string,
   numberOfPlaces: number,
   status: string,
-  category: Category
+  category_id: number
 }

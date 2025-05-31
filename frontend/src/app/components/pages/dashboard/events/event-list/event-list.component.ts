@@ -5,7 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {DatePipe} from '@angular/common';
 import {EventService} from '../../../../../services/event/event.service';
-import { Event } from '../../../../../models/interfaces/event';
+import { EventInterface } from '../../../../../models/interfaces/event';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -24,7 +24,7 @@ import {RouterLink} from '@angular/router';
 export class EventListComponent implements OnInit {
   eventService = inject(EventService)
 
-  events: Event[] = [
+  events: EventInterface[] = [
     /*
     {
       id: 1,
@@ -49,12 +49,21 @@ export class EventListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'place', 'numberOfPlaces', 'actions'];
 
   ngOnInit() {
+
+    this.eventService.event.subscribe({
+      next: (event: EventInterface) => {
+        this.events = [...this.events, event]
+      }
+    })
+
     this.eventService.getAllEvents().subscribe({
-      next: ( events: Event[] ) => {
+      next: ( events: EventInterface[] ) => {
         this.events = events
       }
     })
+
   }
+
 }
 
 

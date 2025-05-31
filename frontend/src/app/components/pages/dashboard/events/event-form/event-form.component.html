@@ -1,47 +1,51 @@
 <mat-card class="event-form-card">
   <mat-card-header>
-    <mat-card-title>Add New Event</mat-card-title>
+    <mat-card-title>{{ eventObj.pageTitle }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="event-form">
+    <form #eventForm class="event-form" (ngSubmit)="onEventSubmit(eventForm)" >
       <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Event Name</mat-label>
-          <input matInput placeholder="Enter event name">
+          <input matInput placeholder="Enter event name" name="name" [(ngModel)]="eventObj.event.name">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <input matInput [matDatepicker]="picker" name="eventDate" [(ngModel)]="eventObj.event.eventDate">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Place</mat-label>
-          <input matInput placeholder="Enter event location">
+          <input matInput placeholder="Enter event location" name="place" [(ngModel)]="eventObj.event.place">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Number of Places</mat-label>
-          <input matInput type="number" placeholder="Enter number of available places">
+          <input matInput type="number" placeholder="Enter number of available places" name="numberOfPlaces" [(ngModel)]="eventObj.event.numberOfPlaces">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Category</mat-label>
-          <mat-select>
-            <mat-option [value]="1">Electronics</mat-option>
-            <mat-option [value]="2">Clothing</mat-option>
-            <mat-option [value]="3">Books</mat-option>
-            <mat-option [value]="4">Sports</mat-option>
-            <mat-option [value]="5">Home & Garden</mat-option>
+          <mat-select name="category_id" [(ngModel)]="eventObj.event.category_id">
+            <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select name="status" [(ngModel)]="eventObj.event.status">
+            <mat-option value="OPENED" >Opened</mat-option>
+            <mat-option value="CLOSED" >Closed</mat-option>
           </mat-select>
         </mat-form-field>
 
         <div class="full-width">
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Enter event description" rows="4"></textarea>
+            <textarea matInput placeholder="Enter event description" rows="4" name="description" [(ngModel)]="eventObj.event.description"></textarea>
           </mat-form-field>
         </div>
       </div>

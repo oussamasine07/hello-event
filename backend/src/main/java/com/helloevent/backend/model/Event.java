@@ -2,6 +2,7 @@ package com.helloevent.backend.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Event {
     private String place;
 
     @Column(name = "event_date")
-    private Date eventDate;
+    private LocalDate eventDate;
 
     @Column(name = "number_of_places", nullable = false)
     private int numberOfPlaces;
@@ -86,11 +87,11 @@ public class Event {
         this.numberOfPlaces = numberOfPlaces;
     }
 
-    public Date getEventDate() {
+    public LocalDate getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 

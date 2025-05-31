@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -8,6 +8,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {Category} from '../../../../../models/interfaces/category';
+
+import { EventInterface } from '../../../../../models/interfaces/event';
+import {CategoryService} from '../../../../../services/category/category.service';
+import {NgForOf} from '@angular/common';
+import {EventForm} from '../../../../../models/types/EventForm-type';
+import {EventService} from '../../../../../services/event/event.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-form',
@@ -20,11 +28,89 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatIconModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './event-form.component.html',
   styleUrl: './event-form.component.css'
 })
-export class EventFormComponent {
+export class EventFormComponent implements OnInit {
+
+  categoryService: CategoryService = inject( CategoryService );
+  eventService: EventService = inject( EventService )
+
+  router: Router = inject(Router)
+
+  categories: Category[] = []
+  ngOnInit() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories: Category[]) => {
+        this.categories = categories
+      }
+    })
+  }
+
+  @Input() eventObj: EventForm = {
+    pageTitle: "Add new event",
+    type: "create",
+    event: {
+      id: null,
+      name: "",
+      description: "",
+      place: "",
+      eventDate: "",
+      numberOfPlaces: 0,
+      status: "",
+      category_id: ""
+    }
+  }
+
+  onEventSubmit ( form: FormsModule ) {
+
+    this.eventService.postEvent(this.eventObj).subscribe({
+      next: ( event: EventInterface ) => {
+        this.eventService.addEvent( event )
+      }
+    })
+
+    this.eventObj = {
+      pageTitle: "Add new event",
+      type: "create",
+      event: {
+        id: null,
+        name: "",
+        description: "",
+        place: "",
+        eventDate: "",
+        numberOfPlaces: 0,
+        status: "",
+        category_id: ""
+      }
+    }
+
+    this.router.navigate(["/dashboard/events"])
+
+  }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
