@@ -6,16 +6,17 @@
     <form class="category-form" #formCategory="ngForm" (ngSubmit)="onSubmitCategory(formCategory)" >
       <mat-form-field appearance="outline">
         <mat-label>Category Name</mat-label>
-        <input hidden type="text" name="type" value="create" [(ngModel)]="categoryObj.type">
-        <input matInput placeholder="Enter category name" name="name" [(ngModel)]="categoryObj.name" >
+        <input hidden type="number" name="id" [(ngModel)]="currentCategory.category.id">
+        <input hidden type="text" name="type" [(ngModel)]="currentCategory.type">
+        <input matInput placeholder="Enter category name" name="name" [(ngModel)]="currentCategory.category.name" >
       </mat-form-field>
       <div class="form-actions">
         <button mat-raised-button color="primary" type="submit">Save Category</button>
       </div>
     </form>
   </mat-card-content>
-<!--  <mat-card-actions align="end">-->
-<!--    <button mat-button color="warn" type="button">Cancel</button>-->
+  <mat-card-actions align="end">
+    <button mat-button color="warn" type="button" *ngIf="currentCategory.type == 'update'" (click)="onCancelCurrentCategory()">Cancel</button>
 <!--    <button mat-raised-button color="primary" type="submit">Save</button>-->
-<!--  </mat-card-actions>-->
+  </mat-card-actions>
 </mat-card>

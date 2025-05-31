@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Category} from '../../intefaces/category';
+import {CategoryFormType} from '../../models/types/CategoryForm-type';
 
 type categoryBody = {
   name: string,
@@ -28,13 +29,15 @@ export class CategoryService {
   }
 
   // @ts-ignore
-  postOrUpdateCategory ( body: categoryBody ): Observable<Category> {
-
-    switch (body.type) {
+  postOrUpdateCategory ( requestBody: CategoryFormType ): Observable<Category> {
+    const body = {
+      name: requestBody.category.name
+    }
+    switch (requestBody.type) {
       case "create":
         return this.httpClient.post<Category>("http://localhost:8080/categories", body)
       case "update":
-        return this.httpClient.put<Category>("http://localhost:8080/categories", body)
+        return this.httpClient.put<Category>(`http://localhost:8080/categories/${requestBody.category.id}`, body)
     }
 
   }

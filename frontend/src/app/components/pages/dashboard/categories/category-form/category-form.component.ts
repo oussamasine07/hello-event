@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -7,6 +7,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, NgForm} from '@angular/forms';
 import {CategoryService} from '../../../../../services/category/category.service';
 import {Category} from '../../../../../intefaces/category';
+import {CategoryFormType} from '../../../../../models/types/CategoryForm-type';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-category-form',
@@ -16,7 +18,8 @@ import {Category} from '../../../../../intefaces/category';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.css'
@@ -27,24 +30,53 @@ export class CategoryFormComponent {
 
   categoryServcie = inject(CategoryService);
 
-  categoryObj = {
-    name: "",
-    type: "create"
+  @Input() currentCategory: CategoryFormType = {
+    type: "create",
+    category: {
+      id: null,
+      name: ""
+    }
   }
+
   onSubmitCategory ( form: NgForm ) {
 
+    //console.log(this.currentCategory)
 
-    this.categoryServcie.postOrUpdateCategory(this.categoryObj).subscribe({
+
+    this.categoryServcie.postOrUpdateCategory(this.currentCategory).subscribe({
       next: ( createdCategory: Category ) => {
-        this.categoryEventEmitter.emit( createdCategory );
+
+        if (this.currentCategory.type == "create") {
+          this.categoryEventEmitter.emit( createdCategory );
+        }
+
+        this.currentCategory = {
+          type: "create",
+          category: {
+            id: null,
+            name: ""
+          }
+        }
       }
     })
 
-    this.categoryObj = {
-      name: "",
-      type: "create"
-    }
+
+
   }
+
+  @Output() cancelCurrentCategory: EventEmitter<CategoryFormType> = new EventEmitter();
+  onCancelCurrentCategory () {
+    const currentcategory: CategoryFormType = {
+      type: "create",
+      category: {
+        id: null,
+        name: ""
+      }
+    }
+
+    this.cancelCurrentCategory.emit(currentcategory)
+  }
+
 }
 
 

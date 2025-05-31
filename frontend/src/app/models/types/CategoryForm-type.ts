@@ -1,0 +1,9 @@
+import {Category} from '../../intefaces/category';
+
+export type CategoryFormType = {
+  type: string,
+  category: {
+    id: number | null,
+    name: string
+  } | Category
+}
