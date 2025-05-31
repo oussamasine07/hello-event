@@ -42,4 +42,8 @@ export class CategoryService {
 
   }
 
+  deleteCategory ( id: number ) {
+    return this.httpClient.delete(`http://localhost:8080/categories/${id}`);
+  }
+
 }

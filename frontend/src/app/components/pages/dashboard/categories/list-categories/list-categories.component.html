@@ -33,7 +33,7 @@
             <button (click)="onEditClick( category )" mat-icon-button color="primary" title="Edit">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" title="Delete">
+            <button mat-icon-button color="warn" title="Delete" (click)="onDeleteClick(category.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

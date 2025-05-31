@@ -58,6 +58,11 @@ export class ListCategoriesComponent implements OnInit {
     this.categoryForm = currenCategory
   }
 
+  onDeleteClick ( id: number ) {
+    this.categories = this.categories.filter(cat => cat.id != id);
+    this.categoryService.deleteCategory( id ).subscribe()
+  }
+
 }
 
 
