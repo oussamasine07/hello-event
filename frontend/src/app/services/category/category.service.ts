@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {Category} from '../../intefaces/category';
+import {Category} from '../../models/interfaces/category';
 import {CategoryFormType} from '../../models/types/CategoryForm-type';
 
 type categoryBody = {

@@ -6,7 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, NgForm} from '@angular/forms';
 import {CategoryService} from '../../../../../services/category/category.service';
-import {Category} from '../../../../../intefaces/category';
+import {Category} from '../../../../../models/interfaces/category';
 import {CategoryFormType} from '../../../../../models/types/CategoryForm-type';
 import {NgIf} from '@angular/common';
 

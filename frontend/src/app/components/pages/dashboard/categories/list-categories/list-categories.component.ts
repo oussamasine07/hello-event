@@ -5,7 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {CategoryFormComponent} from '../category-form/category-form.component';
 import {CategoryService} from '../../../../../services/category/category.service';
-import {Category} from '../../../../../intefaces/category';
+import {Category} from '../../../../../models/interfaces/category';
 import {CategoryFormType} from '../../../../../models/types/CategoryForm-type';
 
 @Component({

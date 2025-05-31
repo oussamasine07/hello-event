@@ -1,4 +1,4 @@
-import {Category} from '../../intefaces/category';
+import {Category} from '../interfaces/category';
 
 export type CategoryFormType = {
   type: string,
