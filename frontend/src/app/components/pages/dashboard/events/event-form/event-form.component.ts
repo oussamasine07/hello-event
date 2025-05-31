@@ -49,9 +49,16 @@ export class EventFormComponent implements OnInit {
         this.categories = categories
       }
     })
+
+    this.eventService.currentEvent.subscribe({
+      next: (eventFom: EventForm) => {
+        console.log( eventFom )
+        this.eventObj = eventFom;
+      }
+    })
   }
 
-  @Input() eventObj: EventForm = {
+  eventObj: EventForm = {
     pageTitle: "Add new event",
     type: "create",
     event: {

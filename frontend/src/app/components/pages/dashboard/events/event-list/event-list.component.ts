@@ -6,7 +6,8 @@ import {MatTableModule} from '@angular/material/table';
 import {DatePipe} from '@angular/common';
 import {EventService} from '../../../../../services/event/event.service';
 import { EventInterface } from '../../../../../models/interfaces/event';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {EventForm} from '../../../../../models/types/EventForm-type';
 
 @Component({
   selector: 'app-event-list',
@@ -48,6 +49,8 @@ export class EventListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'date', 'place', 'numberOfPlaces', 'actions'];
 
+  router: Router = inject(Router)
+
   ngOnInit() {
 
     this.eventService.event.subscribe({
@@ -62,6 +65,16 @@ export class EventListComponent implements OnInit {
       }
     })
 
+  }
+
+  onEditEventClick ( event: EventInterface ) {
+    const currentEvent: EventForm = {
+      pageTitle: `update ${event.name}`,
+      type: "update",
+      event
+    }
+    this.eventService.setCurrentEvent( currentEvent )
+    this.router.navigate(["/dashboard/create-event"])
   }
 
 }

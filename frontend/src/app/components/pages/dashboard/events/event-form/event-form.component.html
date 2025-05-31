@@ -4,6 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <form #eventForm class="event-form" (ngSubmit)="onEventSubmit(eventForm)" >
+      <input type="hidden" name="id" [(ngModel)]="eventObj.event.id">
       <div class="form-grid">
         <mat-form-field appearance="outline">
           <mat-label>Event Name</mat-label>
