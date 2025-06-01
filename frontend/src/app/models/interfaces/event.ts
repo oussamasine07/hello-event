@@ -5,7 +5,7 @@ export interface EventInterface {
   name: string,
   description: string,
   place: string,
-  eventDate: string,
+  eventDate: Date,
   numberOfPlaces: number,
   status: string,
   category_id: number

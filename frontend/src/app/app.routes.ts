@@ -11,6 +11,7 @@ import {EventFormComponent} from './components/pages/dashboard/events/event-form
 import {ClientsListComponent} from './components/pages/dashboard/clients/clients-list/clients-list.component';
 import {HomeComponent} from './components/pages/home/home.component';
 import {ClientLayoutComponent} from './components/layouts/client-layout/client-layout.component';
+import {EventsComponent} from './components/pages/events/events.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         path: "",
         component: HomeComponent
+      },
+      {
+        path: "events",
+        component: EventsComponent
       }
     ]
   },

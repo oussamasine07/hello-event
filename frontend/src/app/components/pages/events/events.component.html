@@ -1,0 +1,39 @@
+<div class="gallery-container">
+  <div class="gallery-header">
+    <h1>Discover Events</h1>
+    <p class="subtitle">Find and book amazing events happening near you</p>
+  </div>
+
+  <div class="events-grid">
+    <mat-card class="event-card" *ngFor="let event of events">
+      <div class="event-image">
+        <img [src]="'assets/images/events/placeholder.jpg'" [alt]="event.name">
+      </div>
+      <mat-card-content>
+        <h2 class="event-title">{{event.name}}</h2>
+        <p class="event-info">
+          <mat-icon>calendar_today</mat-icon>
+          <span>{{event.eventDate | date:'mediumDate'}}</span>
+        </p>
+        <p class="event-info">
+          <mat-icon>location_on</mat-icon>
+          <span>{{event.place}}</span>
+        </p>
+        <p class="event-info">
+          <mat-icon>group</mat-icon>
+          <span>{{event.numberOfPlaces}} places available</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onReserve(event)">
+          <mat-icon>event_seat</mat-icon>
+          Reserve
+        </button>
+        <button mat-stroked-button color="primary" (click)="onViewDetails(event)">
+          <mat-icon>info</mat-icon>
+          Details
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
