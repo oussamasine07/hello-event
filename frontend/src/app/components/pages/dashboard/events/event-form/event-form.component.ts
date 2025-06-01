@@ -12,7 +12,7 @@ import {Category} from '../../../../../models/interfaces/category';
 
 import { EventInterface } from '../../../../../models/interfaces/event';
 import {CategoryService} from '../../../../../services/category/category.service';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {EventForm} from '../../../../../models/types/EventForm-type';
 import {EventService} from '../../../../../services/event/event.service';
 import {Router} from '@angular/router';
@@ -30,7 +30,8 @@ import {Router} from '@angular/router';
     MatDatepickerModule,
     MatNativeDateModule,
     NgForOf,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './event-form.component.html',
   styleUrl: './event-form.component.css'
@@ -98,6 +99,26 @@ export class EventFormComponent implements OnInit {
 
     this.router.navigate(["/dashboard/events"])
 
+  }
+
+
+  onCancelEditEventClick () {
+    this.eventObj = {
+      pageTitle: "Add new event",
+      type: "create",
+      event: {
+        id: null,
+        name: "",
+        description: "",
+        place: "",
+        eventDate: "",
+        numberOfPlaces: 0,
+        status: "",
+        category_id: ""
+      }
+    }
+
+    this.router.navigate(["/dashboard/events"])
   }
 
 }

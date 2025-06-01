@@ -57,6 +57,11 @@ export class EventService {
 
   }
 
+
+  deleteEvent ( id: number) {
+    return this.httpClient.delete(`http://localhost:8080/events/${id}`)
+  }
+
 }
 
 

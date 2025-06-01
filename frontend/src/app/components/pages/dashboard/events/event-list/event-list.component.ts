@@ -77,6 +77,11 @@ export class EventListComponent implements OnInit {
     this.router.navigate(["/dashboard/create-event"])
   }
 
+  onDeleteEventClick ( id: number ) {
+    this.events = this.events.filter(event => event.id != id )
+    this.eventService.deleteEvent( id ).subscribe()
+  }
+
 }
 
 
