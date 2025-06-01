@@ -4,6 +4,7 @@ import com.helloevent.backend.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -38,23 +39,37 @@ public class SecurityConfig {
         HttpSecurity http
     ) throws Exception {
 
-        // disable csrf
+//        // disable csrf
+//        return http
+//                .csrf(customizer -> customizer.disable())
+//                .authorizeHttpRequests(request ->
+//                        request
+//                                .requestMatchers("/user/register", "/user/login")
+//                                .permitAll()
+//                                .anyRequest()
+//                                .authenticated()
+//                )
+//                .httpBasic(Customizer.withDefaults())
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                )
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+
         return http
-                .csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request ->
-                        request
-                                .requestMatchers("/user/register", "/user/login")
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // Allow all OPTIONS requests for CORS preflight
+                        .requestMatchers("/user/register", "/user/login").permitAll()  // Allow anonymous access for these endpoints
+                        .anyRequest().authenticated()  // Other requests need auth
                 )
                 .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+
 
 
     @Bean
