@@ -1,0 +1,125 @@
+<div class="profile-dashboard">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h1>My Profile</h1>
+    <div class="user-controls">
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="dashboard-content">
+    <!-- Left Section - Profile Summary -->
+    <div class="profile-summary">
+      <div class="profile-card">
+        <div class="profile-image-container">
+          <div class="profile-image">
+            <img src="assets/profile-placeholder.jpg" alt="Profile photo">
+          </div>
+          <button mat-flat-button class="update-photo-btn">
+            <mat-icon>photo_camera</mat-icon>
+            Update Photo
+          </button>
+        </div>
+
+        <div class="profile-basic-info">
+          <h2>John Doe</h2>
+          <p class="email">john.doe&#64;example.com</p>
+        </div>
+
+        <div class="reservation-stats">
+          <div class="stat-item">
+            <span class="stat-value">5</span>
+            <span class="stat-label">Total Reservations</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Active Reservations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section - Details and Activity -->
+    <div class="profile-details-section">
+      <!-- Personal Details Card -->
+      <div class="detail-card">
+        <div class="card-header">
+          <h3>Personal Information</h3>
+          <button mat-flat-button color="primary" class="edit-details-btn">
+            <mat-icon>edit</mat-icon>
+            Edit Details
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="details-grid">
+            <div class="info-group">
+              <label>First Name</label>
+              <p>John</p>
+            </div>
+            <div class="info-group">
+              <label>Last Name</label>
+              <p>Doe</p>
+            </div>
+            <div class="info-group">
+              <label>Email</label>
+              <p>john.doe&#64;example.com</p>
+            </div>
+            <div class="info-group">
+              <label>Phone</label>
+              <p>+1 (555) 123-4567</p>
+            </div>
+            <div class="info-group">
+              <label>Address</label>
+              <p>123 Main Street, City, Country</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity Card -->
+      <div class="detail-card">
+        <div class="card-header">
+          <h3>Recent Activity</h3>
+          <button mat-flat-button class="view-all-btn">
+            <span>View All</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="activity-timeline">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <img src="assets/images/concert.jpg" alt="Summer Concert">
+              </div>
+              <div class="activity-details">
+                <h4>New Reservation Confirmed</h4>
+                <p>Summer Concert 2024</p>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+              <div class="activity-status">
+                <span class="status-badge confirmed">Confirmed</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">
+                <img src="assets/images/conference.jpg" alt="Tech Conference">
+              </div>
+              <div class="activity-details">
+                <h4>Reservation Pending</h4>
+                <p>Tech Conference</p>
+                <span class="activity-time">1 day ago</span>
+              </div>
+              <div class="activity-status">
+                <span class="status-badge pending">Pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<mat-toolbar class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <!-- Logo/Brand -->
+    <a routerLink="/" class="brand">
+      <span class="brand-text">EventHub</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-links" [class.show-mobile-menu]="isMenuOpen">
+      <a mat-button routerLink="/events" routerLinkActive="active">Events</a>
+      <a mat-button routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a mat-button routerLink="/signin" routerLinkActive="active">Sign In</a>
+      <a mat-raised-button color="primary" routerLink="/signup" routerLinkActive="active" class="signup-btn">
+        Sign Up
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button mat-icon-button class="menu-button" (click)="toggleMenu()">
+      <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
