@@ -1,0 +1,109 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  height: 64px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1976d2;
+  margin-left: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.signup-btn {
+  margin-left: 0.5rem;
+}
+
+.active {
+  color: #1976d2;
+}
+
+.menu-button {
+  display: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .menu-button {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 0.5rem;
+  }
+
+  .nav-links.show-mobile-menu {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .signup-btn {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Animation for mobile menu */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.show-mobile-menu {
+  animation: slideDown 0.3s ease-out forwards;
+}

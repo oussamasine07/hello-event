@@ -1,0 +1,63 @@
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Discover Extraordinary Events</h1>
+    <p>Experience unforgettable moments with our curated selection of premier events.</p>
+    <a mat-raised-button color="primary" routerLink="/events" class="cta-button">
+      Browse Events
+      <mat-icon>arrow_forward</mat-icon>
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>Creating Memorable Experiences</h2>
+      <p>At EventHub, we believe in the power of bringing people together. Our platform connects event organizers with enthusiastic attendees, creating unforgettable experiences that last a lifetime.</p>
+      <div class="features">
+        <div class="feature">
+          <mat-icon color="primary">event_available</mat-icon>
+          <h3>Easy Booking</h3>
+          <p>Simple and secure ticket reservations</p>
+        </div>
+        <div class="feature">
+          <mat-icon color="primary">location_on</mat-icon>
+          <h3>Local Events</h3>
+          <p>Discover events in your area</p>
+        </div>
+        <div class="feature">
+          <mat-icon color="primary">verified_user</mat-icon>
+          <h3>Trusted Platform</h3>
+          <p>Safe and reliable transactions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <h2>What People Say</h2>
+  <div class="testimonials-container">
+    <div class="testimonial-cards">
+      <mat-card *ngFor="let testimonial of testimonials" class="testimonial-card">
+        <mat-card-content>
+          <div class="testimonial-quote">
+            <mat-icon>format_quote</mat-icon>
+            <p>{{ testimonial.quote }}</p>
+          </div>
+          <div class="testimonial-author">
+            <img [src]="testimonial.image" [alt]="testimonial.name" class="author-image">
+            <div class="author-info">
+              <h4>{{ testimonial.name }}</h4>
+              <p>{{ testimonial.role }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

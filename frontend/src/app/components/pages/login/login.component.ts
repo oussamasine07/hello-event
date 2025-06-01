@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Router} from '@angular/router';
+import {NavbarComponent} from '../../layouts/navbar/navbar.component';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ import {Router} from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    NavbarComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
