@@ -20,8 +20,9 @@ export class SidebareComponent {
   menuItems = [
     { icon: 'dashboard', label: 'Dashboard', route: '/dashboard' },
     { icon: 'analytics', label: 'Analytics', route: '/analytics' },
-    { icon: 'people', label: 'Users', route: '/users' },
-    { icon: 'shopping_cart', label: 'Products', route: '/products' },
+    { icon: 'people', label: 'Clients', route: '/dashboard/clients' },
+    { icon: 'event', label: 'Events', route: '/dashboard/events' },
+    { icon: 'category', label: 'Categories', route: '/dashboard/categories' },
     { icon: 'settings', label: 'Settings', route: '/settings' }
   ];
 }
