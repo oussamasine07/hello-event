@@ -13,6 +13,7 @@ import {HomeComponent} from './components/pages/home/home.component';
 import {ClientLayoutComponent} from './components/layouts/client-layout/client-layout.component';
 import {EventsComponent} from './components/pages/events/events.component';
 import {EventDetailsComponent} from './components/pages/event-details/event-details.component';
+import {ProfileComponent} from './components/pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
       {
         path: "events/:idEvent",
         component: EventDetailsComponent
+      },
+      {
+        path: "profile",
+        component: ProfileComponent
       }
     ]
   },
