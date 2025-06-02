@@ -1,5 +1,6 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.dto.AuthUserDTO;
 import com.helloevent.backend.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -71,16 +72,22 @@ public class JwtService {
         return extarctClaims(token, Claims::getExpiration);
     }
 
-    public String generateJwtToken (User user) {
-        System.out.println(user.getId());
-        System.out.println(user.getUsername());
+    public String generateJwtToken (AuthUserDTO authUser) {
+        System.out.println(authUser.email());
+        System.out.println(authUser.username());
 
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id", authUser.id());
+        claims.put("firstName", authUser.firstName());
+        claims.put("lastName", authUser.lastName());
+        claims.put("username", authUser.username());
+        claims.put("email", authUser.email());
+        claims.put("role", authUser.role());
 
         return Jwts.builder()
                 .claims()
                 .add(claims)
-                .subject(user.getUsername())
+                .subject(authUser.username())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 60 * 40))
                 .and()
