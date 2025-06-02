@@ -9,10 +9,13 @@
     <nav class="nav-links" [class.show-mobile-menu]="isMenuOpen">
       <a mat-button routerLink="/events" routerLinkActive="active">Events</a>
       <a mat-button routerLink="/profile" routerLinkActive="active">Profile</a>
-      <a mat-button routerLink="/signin" routerLinkActive="active">Sign In</a>
-      <a mat-raised-button color="primary" routerLink="/signup" routerLinkActive="active" class="signup-btn">
-        Sign Up
+      <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">login</a>
+      <a mat-raised-button color="primary" routerLink="/regirser" routerLinkActive="active" class="signup-btn" *ngIf="!isLoggedIn">
+        Register
       </a>
+      <button mat-raised-button color="primary" routerLink="/regirser" routerLinkActive="active" class="signup-btn" *ngIf="isLoggedIn" (click)="onLogoutClick()">
+        Logout
+      </button>
     </nav>
 
     <!-- Mobile Menu Button -->
