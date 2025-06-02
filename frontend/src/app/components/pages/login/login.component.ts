@@ -39,15 +39,25 @@ export class LoginComponent implements OnInit {
 
   onLoginFormSubmit (form: FormsModule) {
     this.authService.loginClient(this.loginFormObj).subscribe({
-      next: (res: string) => {
-        localStorage.setItem("token", res)
+      next: (token: string) => {
+        localStorage.setItem("token", token)
+
+        switch (this.authService.getUserRole( token )) {
+          case "ADMIN":
+            this.router.navigate(["/dashboard"])
+            break;
+          case "CLIENT":
+            this.router.navigate(["/client/profile"])
+            break;
+        }
+
       }
     })
     this.loginFormObj = {
       username: "",
       password: ""
     }
-    this.router.navigate(["/dashboard"])
+
   }
 
   ngOnInit() {

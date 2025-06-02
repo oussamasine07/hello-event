@@ -1,5 +1,7 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.dto.AuthUserDTO;
+import com.helloevent.backend.mapper.UserMapper;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.UserRepository;
@@ -18,15 +20,18 @@ public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserMapper userMapper;
 
     public UserService (
             final UserRepository userRepository,
             final AuthenticationManager authenticationManager,
-            final JwtService jwtService
+            final JwtService jwtService,
+            final UserMapper userMapper
     ) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.userMapper = userMapper;
     }
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -49,7 +54,8 @@ public class UserService {
                 );
 
         if (authentication.isAuthenticated()){
-            return jwtService.generateJwtToken(user);
+            AuthUserDTO authUser = this.getAuthenticatedUser(user.getUsername());
+            return jwtService.generateJwtToken(authUser);
         }
 
         return "Fails";
@@ -77,6 +83,11 @@ public class UserService {
         } else {
             throw new Error("unauthorized action");
         }
+    }
+
+    public AuthUserDTO getAuthenticatedUser ( String usernameOrEmail ) {
+        User authenticatedUser = userRepository.getUserByUsernameOrByEmail( usernameOrEmail );
+        return userMapper.toDTO(authenticatedUser);
     }
 
 }

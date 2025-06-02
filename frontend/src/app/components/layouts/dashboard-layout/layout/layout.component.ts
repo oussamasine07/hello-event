@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   isSidenavOpen = true;
 
   authService = inject(AuthService)
+  router: Router = inject( Router )
 
   token: string | null = localStorage.getItem("token");
 
@@ -32,6 +33,9 @@ export class LayoutComponent implements OnInit {
     // redirect user to login if not authenticated
     this.authService.redirectIfNotLoggedIn(this.token);
 
+    if ( this.authService.getUserRole( this.token ) == "CLIENT" ) {
+      this.router.navigate(["/client/profile"]);
+    }
 
   }
 
