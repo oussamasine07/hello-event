@@ -33,7 +33,7 @@ export const routes: Routes = [
         component: EventDetailsComponent
       },
       {
-        path: "profile",
+        path: "client/profile",
         component: ProfileComponent
       }
     ]
