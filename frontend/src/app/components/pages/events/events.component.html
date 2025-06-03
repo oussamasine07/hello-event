@@ -29,10 +29,10 @@
           <mat-icon>event_seat</mat-icon>
           Reserve
         </button>
-        <button mat-stroked-button color="primary" (click)="onViewDetails(event)">
+        <a routerLink="/events/{{ event.id }}" mat-stroked-button color="primary" (click)="onViewDetails(event)">
           <mat-icon>info</mat-icon>
           Details
-        </button>
+        </a>
       </mat-card-actions>
     </mat-card>
   </div>

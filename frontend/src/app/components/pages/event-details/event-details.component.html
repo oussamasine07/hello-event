@@ -79,7 +79,7 @@
             mat-raised-button
             color="primary"
             class="reserve-button"
-            (click)="onReserve()"
+            (click)="onReserve( event.id )"
             [disabled]="event.status.toLowerCase() === 'sold out'">
             <mat-icon>confirmation_number</mat-icon>
             {{event.status.toLowerCase() === 'sold out' ? 'Sold Out' : 'Reserve Your Spot'}}
