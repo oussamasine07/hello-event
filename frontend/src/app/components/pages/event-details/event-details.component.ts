@@ -4,9 +4,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../../services/event/event.service';
 import {EventInterface} from '../../../models/interfaces/event';
+import {AuthService} from '../../../services/auth/auth.service';
+import {ReservationService} from '../../../services/reservation/reservation.service';
 
 @Component({
   selector: 'app-event-details',
@@ -35,7 +37,13 @@ export class EventDetailsComponent {
 
   constructor(private route: ActivatedRoute) {}
 
+  router: Router = inject(Router)
+
   eventService: EventService = inject( EventService );
+  authService: AuthService = inject( AuthService );
+  reservationService: ReservationService = inject( ReservationService );
+
+  token: string | null = localStorage.getItem("token")
 
   ngOnInit() {
     // In a real app, we would fetch the event details using the ID from the route
@@ -49,9 +57,22 @@ export class EventDetailsComponent {
 
   }
 
-  onReserve() {
-    // TODO: Implement reservation logic
-    console.log('Reserving event:', this.event.id);
+  onReserve( eventId: number | null) {
+    // check if user logged in
+    if (this.token) {
+
+      this.reservationService.reserveEvent( eventId ).subscribe({
+        next: (reservation ) => {
+          console.log(reservation)
+        }
+      })
+    } else {
+      // todo: set a session to redirect back to the current url after loggin
+
+      this.router.navigate(["/login"])
+    }
+
+
   }
 
   formatDate(date: Date): string {

@@ -41,15 +41,22 @@ public class ReservationService {
         // get event
         Event event = eventService.showEvent(reservationDTO.event_id()).orElseThrow();
 
-        // register a reservation
-        Reservation newReservation = new Reservation();
-        newReservation.setEvent(event);
-        newReservation.setUser(user);
+        // get reservation by user_id and event_id
+        Reservation reservation = reservationRepository.getReservationByUserIdAndByEventId(user.getId(), event.getId());
 
-        // decrement number of places in event
-        eventService.decrementNumberOfPlaces(reservationDTO.event_id());
+        if (reservation != null ) {
+            throw new Error(" you already reserved for this event");
+        } else {
+            // register a reservation
+            Reservation newReservation = new Reservation();
+            newReservation.setEvent(event);
+            newReservation.setUser(user);
 
-        return reservationRepository.save(newReservation);
+            // decrement number of places in event
+            eventService.decrementNumberOfPlaces(reservationDTO.event_id());
+
+            return reservationRepository.save(newReservation);
+        }
     }
 
 }
