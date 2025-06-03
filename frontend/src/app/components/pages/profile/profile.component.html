@@ -25,8 +25,8 @@
         </div>
 
         <div class="profile-basic-info">
-          <h2>John Doe</h2>
-          <p class="email">john.doe&#64;example.com</p>
+          <h2>{{ userProfile?.firstName }} {{ userProfile?.lastName}}</h2>
+          <p class="email">{{ userProfile?.email }}</p>
         </div>
 
         <div class="reservation-stats">
@@ -57,23 +57,19 @@
           <div class="details-grid">
             <div class="info-group">
               <label>First Name</label>
-              <p>John</p>
+              <p>{{ userProfile?.firstName }}</p>
             </div>
             <div class="info-group">
               <label>Last Name</label>
-              <p>Doe</p>
+              <p>{{ userProfile?.lastName }}</p>
             </div>
             <div class="info-group">
               <label>Email</label>
-              <p>john.doe&#64;example.com</p>
+              <p>{{ userProfile?.email }}</p>
             </div>
             <div class="info-group">
-              <label>Phone</label>
-              <p>+1 (555) 123-4567</p>
-            </div>
-            <div class="info-group">
-              <label>Address</label>
-              <p>123 Main Street, City, Country</p>
+              <label>username</label>
+              <p>{{ userProfile?.username }}</p>
             </div>
           </div>
         </div>
@@ -90,33 +86,20 @@
         </div>
         <div class="card-content">
           <div class="activity-timeline">
-            <div class="activity-item">
+            <div class="activity-item" *ngFor="let res of reservations">
               <div class="activity-icon">
                 <img src="assets/images/concert.jpg" alt="Summer Concert">
               </div>
               <div class="activity-details">
-                <h4>New Reservation Confirmed</h4>
-                <p>Summer Concert 2024</p>
-                <span class="activity-time">2 hours ago</span>
+                <h4>{{ res.event.name }}</h4>
+                <p>{{ res.event.place }}</p>
+                <span class="activity-time">{{ res.event.eventDate }}</span>
               </div>
               <div class="activity-status">
-                <span class="status-badge confirmed">Confirmed</span>
+                <span [ngClass]="res.event.status == 'OPENED' ? 'status-badge confirmed' : 'status-badge pending' ">{{ res.event.status }}</span>
               </div>
             </div>
 
-            <div class="activity-item">
-              <div class="activity-icon">
-                <img src="assets/images/conference.jpg" alt="Tech Conference">
-              </div>
-              <div class="activity-details">
-                <h4>Reservation Pending</h4>
-                <p>Tech Conference</p>
-                <span class="activity-time">1 day ago</span>
-              </div>
-              <div class="activity-status">
-                <span class="status-badge pending">Pending</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
