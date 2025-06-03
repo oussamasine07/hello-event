@@ -3,7 +3,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const token: string | null = localStorage.getItem("token");
 
-  if (req.url.includes("/user/login") || req.url.includes("/user/register")) {
+  if (req.url.includes("/user/login") || req.url.includes("/user/register") || req.url.includes("/events")) {
     return next(req)
   }
 

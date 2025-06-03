@@ -43,6 +43,10 @@ export class EventService {
     return this.httpClient.get<EventInterface[]>("http://localhost:8080/events")
   }
 
+  getEventById ( id: string | null ): Observable<EventInterface> {
+    return this.httpClient.get<EventInterface>(`http://localhost:8080/events/${id}`)
+  }
+
   // @ts-ignore
   postEvent (requestBody: EventForm ): Observable<EventInterface> {
     switch (requestBody.type) {
