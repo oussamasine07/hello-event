@@ -8,7 +8,7 @@
     <!-- Desktop Navigation -->
     <nav class="nav-links" [class.show-mobile-menu]="isMenuOpen">
       <a mat-button routerLink="/events" routerLinkActive="active">Events</a>
-      <a mat-button routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn">Profile</a>
       <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">login</a>
       <a mat-raised-button color="primary" routerLink="/regirser" routerLinkActive="active" class="signup-btn" *ngIf="!isLoggedIn">
         Register
