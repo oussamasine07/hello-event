@@ -6,7 +6,7 @@ import {MatCardModule} from '@angular/material/card';
 import {CommonModule} from '@angular/common';
 import {MatDivider} from '@angular/material/divider';
 import {AuthService} from '../../../services/auth/auth.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {UserInterface} from '../../../models/interfaces/user';
 import {UserService} from '../../../services/user/user.service';
 import {Reservation} from '../../../models/interfaces/reservation';
@@ -19,7 +19,8 @@ import {Reservation} from '../../../models/interfaces/reservation';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
-    MatDivider
+    MatDivider,
+    RouterLink
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
