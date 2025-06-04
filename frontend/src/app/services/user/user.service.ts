@@ -25,4 +25,14 @@ export class UserService {
     return this.httpClient.get<Reservation[]>(`http://localhost:8080/reservation/${ userId }`)
   }
 
+  updateProfile ( body: any ): Observable<string> {
+    return this.httpClient.put(
+      "http://localhost:8080/user/update-profile",
+      body,
+      {
+        responseType: "text"
+      }
+    );
+  }
+
 }

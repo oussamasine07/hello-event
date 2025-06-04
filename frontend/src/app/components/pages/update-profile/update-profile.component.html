@@ -1,0 +1,52 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Update your profile</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form" #registerForm (ngSubmit)="onUpdateProfileSubmit( registerForm )" >
+        <div class="name-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Enter your first name" name="firstName" [(ngModel)]="updateProfileObj.firstName">
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Enter your last name" name="lastName" [(ngModel)]="updateProfileObj.lastName">
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" placeholder="Enter your username" name="username" [(ngModel)]="updateProfileObj.username">
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="Enter your email" name="email" [(ngModel)]="updateProfileObj.email">
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Password</mat-label>-->
+<!--          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="">-->
+<!--          <mat-icon matPrefix>lock</mat-icon>-->
+<!--          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">-->
+<!--            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-form-field>-->
+
+
+        <button mat-raised-button color="primary" type="submit" class="submit-button">
+          Update Profile
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

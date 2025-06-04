@@ -1,10 +1,12 @@
 package com.helloevent.backend.service;
 
 import com.helloevent.backend.dto.AuthUserDTO;
+import com.helloevent.backend.dto.UpdateProfileDTO;
 import com.helloevent.backend.mapper.UserMapper;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.UserRepository;
+import io.jsonwebtoken.Claims;
 import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -88,6 +90,26 @@ public class UserService {
     public AuthUserDTO getAuthenticatedUser ( String usernameOrEmail ) {
         User authenticatedUser = userRepository.getUserByUsernameOrByEmail( usernameOrEmail );
         return userMapper.toDTO(authenticatedUser);
+    }
+
+    public String updateProfileService ( UpdateProfileDTO updateProfileDTO, String token ) {
+
+        String username = jwtService.extarctUsername( token.substring(7) );
+        System.out.println("***************************************************************************");
+        System.out.println(username);
+        System.out.println("***************************************************************************");
+        User authenticatedUser = userRepository.getUserByUsernameOrByEmail( username );
+
+        authenticatedUser.setFirstName(updateProfileDTO.firstName());
+        authenticatedUser.setLastName(updateProfileDTO.lastName());
+        authenticatedUser.setUsername(updateProfileDTO.username());
+        authenticatedUser.setEmail(updateProfileDTO.email());
+
+        userRepository.save(authenticatedUser);
+
+        AuthUserDTO authUserDTO = userMapper.toDTO( authenticatedUser );
+
+        return jwtService.generateJwtToken( authUserDTO );
     }
 
 }
