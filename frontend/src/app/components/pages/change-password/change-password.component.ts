@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {
@@ -12,6 +12,8 @@ import {
 import {MatFormField, MatInput, MatLabel, MatPrefix, MatSuffix} from '@angular/material/input';
 import {NavbarComponent} from '../../layouts/navbar/navbar.component';
 import {MatIcon} from '@angular/material/icon';
+import {Router} from '@angular/router';
+import {UserService} from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-change-password',
@@ -39,6 +41,9 @@ import {MatIcon} from '@angular/material/icon';
 export class ChangePasswordComponent {
   hidePassword = true;
 
+  router: Router = inject(Router);
+  userServcie: UserService = inject(UserService);
+
   changePasswordObj = {
     oldPassword: "",
     newPassword: "",
@@ -46,8 +51,19 @@ export class ChangePasswordComponent {
   }
   onChangePasswordForm ( form: FormsModule ) {
     console.log(this.changePasswordObj)
+    this.userServcie.changePassword(this.changePasswordObj).subscribe({
+      next: ( res ) => {
+        console.log(res);
 
+        this.router.navigate(["/client/profile"])
 
+        this.changePasswordObj = {
+          oldPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+        }
+      }
+    })
   }
 
 }

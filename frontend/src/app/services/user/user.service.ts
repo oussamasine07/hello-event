@@ -35,4 +35,8 @@ export class UserService {
     );
   }
 
+  changePassword ( body: any ): Observable<any> {
+    return this.httpClient.put("http://localhost:8080/user/change-password", body);
+  }
+
 }
