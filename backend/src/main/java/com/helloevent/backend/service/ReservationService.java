@@ -1,12 +1,18 @@
 package com.helloevent.backend.service;
 
 import com.helloevent.backend.dto.ReservationDTO;
+import com.helloevent.backend.dto.ReservationResultDTO;
+import com.helloevent.backend.mapper.ReservationResultMapper;
 import com.helloevent.backend.model.Event;
 import com.helloevent.backend.model.Reservation;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.ReservationRepository;
 import com.helloevent.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -17,18 +23,24 @@ public class ReservationService {
 
     private final JwtService jwtService;
 
+    private final ReservationResultMapper reservationResultMapper;
+
     public ReservationService (
             final ReservationRepository reservationRepository,
             final UserRepository userRepository,
 
             final JwtService jwtService,
-            final EventService eventService
+            final EventService eventService,
+
+            final ReservationResultMapper reservationResultMapper
     ) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
 
         this.eventService = eventService;
         this.jwtService = jwtService;
+
+        this.reservationResultMapper = reservationResultMapper;
     }
 
 
@@ -59,4 +71,21 @@ public class ReservationService {
         }
     }
 
+    public List<ReservationResultDTO> getReservationsByUserId (Long userId ) {
+        return reservationRepository.getReservationByUserId( userId )
+                .stream()
+                .map(this.reservationResultMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

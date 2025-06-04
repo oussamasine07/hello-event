@@ -14,6 +14,8 @@ import {ClientLayoutComponent} from './components/layouts/client-layout/client-l
 import {EventsComponent} from './components/pages/events/events.component';
 import {EventDetailsComponent} from './components/pages/event-details/event-details.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
+import {UpdateProfileComponent} from './components/pages/update-profile/update-profile.component';
+import {ChangePasswordComponent} from './components/pages/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,14 @@ export const routes: Routes = [
       {
         path: "client/profile",
         component: ProfileComponent
+      },
+      {
+        path: "client/profile/edit",
+        component: UpdateProfileComponent
+      },
+      {
+        path: "client/profile/change-password",
+        component: ChangePasswordComponent
       }
     ]
   },
