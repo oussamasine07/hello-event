@@ -2,6 +2,7 @@ package com.helloevent.backend.dto;
 
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.validation.EmailExists;
+import com.helloevent.backend.validation.UsernameExists;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ public record RegisterDTO(
         String last_name,
 
         @NotBlank(message = "username is required")
+        @UsernameExists
         String username,
 
         @NotBlank(message = "email is required")
