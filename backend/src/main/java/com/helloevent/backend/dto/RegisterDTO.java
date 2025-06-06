@@ -1,6 +1,7 @@
 package com.helloevent.backend.dto;
 
 import com.helloevent.backend.model.Role;
+import com.helloevent.backend.validation.ConfirmPassword;
 import com.helloevent.backend.validation.EmailExists;
 import com.helloevent.backend.validation.UserRole;
 import com.helloevent.backend.validation.UsernameExists;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@ConfirmPassword
 public record RegisterDTO(
         @NotBlank(message = "firstname is required")
         String first_name,
@@ -29,6 +31,8 @@ public record RegisterDTO(
         @Min(value = 6, message = "password should be at least 6 charachters")
         String password,
 
+        @NotBlank(message = "confirm password is required")
+        String confirmPassword,
 
         @UserRole
         @NotNull(message = "role is required")
