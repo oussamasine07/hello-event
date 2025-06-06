@@ -2,6 +2,7 @@ package com.helloevent.backend.dto;
 
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.validation.EmailExists;
+import com.helloevent.backend.validation.UserRole;
 import com.helloevent.backend.validation.UsernameExists;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -28,6 +29,8 @@ public record RegisterDTO(
         @Min(value = 6, message = "password should be at least 6 charachters")
         String password,
 
+
+        @UserRole
         @NotNull(message = "role is required")
         Role role
 ) {
