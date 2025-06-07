@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {NavbarComponent} from '../../layouts/navbar/navbar.component';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ import {NavbarComponent} from '../../layouts/navbar/navbar.component';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    NavbarComponent
+    NavbarComponent,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -30,6 +32,8 @@ export class LoginComponent implements OnInit {
 
   token: string | null = localStorage.getItem("token");
 
+  fieldErrors: Record<string, string|string[]> = {};
+
   authService = inject(AuthService)
 
   loginFormObj = {
@@ -39,10 +43,10 @@ export class LoginComponent implements OnInit {
 
   onLoginFormSubmit (form: FormsModule) {
     this.authService.loginClient(this.loginFormObj).subscribe({
-      next: (token: string) => {
-        localStorage.setItem("token", token)
+      next: (res) => {
+        localStorage.setItem("token", res.token)
 
-        switch (this.authService.getUserRole( token )) {
+        switch (this.authService.getUserRole( res.token )) {
           case "ADMIN":
             this.router.navigate(["/dashboard"])
             break;
@@ -50,18 +54,28 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["/client/profile"])
             break;
         }
-
+        this.loginFormObj = {
+          username: "",
+          password: ""
+        }
+      },
+      error: (err) => {
+        this.fieldErrors = err.error;
+        console.log(this.fieldErrors)
       }
     })
-    this.loginFormObj = {
-      username: "",
-      password: ""
-    }
 
   }
 
   ngOnInit() {
     this.authService.redirectIfLoggedIn( this.token )
+  }
+
+  clearFieldError(field: string) {
+    // Re-assign a new object so Angular notices the change.
+    const lookNew = { ...this.fieldErrors };
+    delete lookNew[field];
+    this.fieldErrors = lookNew;
   }
 
 }

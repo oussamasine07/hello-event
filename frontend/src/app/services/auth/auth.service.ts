@@ -37,9 +37,12 @@ export class AuthService {
     );
   }
 
-  loginClient ( body: loginBody ): Observable<string> {
-    console.log(body)
-    return this.httpClient.post("http://localhost:8080/user/login", body, { responseType: 'text'});
+  loginClient ( body: loginBody ): Observable<any> {
+    return this.httpClient.post<any>("http://localhost:8080/user/login", body).pipe(
+      catchError( (err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    );
   }
 
   redirectIfNotLoggedIn ( token: string | null) {

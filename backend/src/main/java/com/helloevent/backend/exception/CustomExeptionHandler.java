@@ -21,9 +21,8 @@ public class CustomExeptionHandler {
         WebRequest req
     ) {
 
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", new Date());
-        body.put("message", ex.getMessage());
+        Map<String, String> body = new HashMap<>();
+        body.put("password", ex.getMessage());
 
         return new ResponseEntity<>( body, HttpStatus.BAD_REQUEST );
 
