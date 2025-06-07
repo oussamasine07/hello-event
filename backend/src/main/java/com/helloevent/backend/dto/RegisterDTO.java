@@ -35,7 +35,6 @@ public record RegisterDTO(
         String confirmPassword,
 
         @UserRole
-        @NotNull(message = "role is required")
         Role role
 ) {
 

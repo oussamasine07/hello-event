@@ -1,6 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -34,17 +34,23 @@ export class RegisterComponent implements OnInit {
   router = inject(Router)
   token: string | null = localStorage.getItem("token");
 
+  registerErrors: Record<string, string|string[]> = {};
+
   authService = inject(AuthService)
+
+
+  ngOnInit() {
+    this.authService.redirectIfLoggedIn( this.token )
+  }
+
+
   registerFormObj = {
     first_name: "",
     last_name: "",
     username: "",
     email: "",
-    password: ""
-  }
-
-  ngOnInit() {
-    this.authService.redirectIfLoggedIn( this.token )
+    password: "",
+    confirmPassword: ""
   }
 
   onRegisterSubmit (form: FormsModule) {
@@ -52,20 +58,22 @@ export class RegisterComponent implements OnInit {
     this.authService.registerClient(this.registerFormObj).subscribe({
       next: ( res ) => {
         console.log(res)
+        this.router.navigate(["/login"])
+      },
+      error: (resError: any ) => {
+        this.registerErrors = resError.error;
+        console.log( this.registerErrors )
       }
     })
-
-    this.registerFormObj = {
-      first_name: "",
-      last_name: "",
-      username: "",
-      email: "",
-      password: ""
-    }
-
-    this.router.navigate(["/login"])
   }
 
+  clearFieldError(field: string) {
+    // Re-assign a new object so Angular notices the change.
+    const lookNew = { ...this.registerErrors };
+    delete lookNew[field];
+    this.registerErrors = lookNew;
+  }
+  protected readonly Array = Array;
 }
 
 

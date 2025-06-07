@@ -8,7 +8,7 @@ public class UserRoleValidator implements ConstraintValidator<UserRole, Role> {
 
     @Override
     public boolean isValid(Role role, ConstraintValidatorContext constraintValidatorContext) {
-        if ( role == null ) return false;
+        if ( role == null ) return true;
 
         return role == Role.ADMIN || role == Role.CLIENT;
     }

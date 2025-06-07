@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {jwtDecode} from 'jwt-decode';
 import {UserPayloadInterface} from '../../models/interfaces/user-payload-interface';
@@ -30,7 +30,11 @@ export class AuthService {
   constructor() { }
 
   registerClient (body: registerBody) {
-    return this.httpClient.post("http://localhost:8080/user/register", body);
+    return this.httpClient.post("http://localhost:8080/user/register", body).pipe(
+      catchError( ( err: HttpErrorResponse ) => {
+        return throwError(() => err);
+      })
+    );
   }
 
   loginClient ( body: loginBody ): Observable<string> {
