@@ -4,6 +4,8 @@ import com.helloevent.backend.dto.LoginDTO;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.service.JwtService;
 import com.helloevent.backend.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login ( @RequestBody LoginDTO loginDTO ) {
+    public ResponseEntity<?> login (@Valid @RequestBody LoginDTO loginDTO ) {
         User user = new User();
 
         user.setUsername(loginDTO.username());

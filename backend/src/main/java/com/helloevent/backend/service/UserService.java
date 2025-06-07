@@ -3,17 +3,18 @@ package com.helloevent.backend.service;
 import com.helloevent.backend.dto.AuthUserDTO;
 import com.helloevent.backend.dto.ChangePasswordDTO;
 import com.helloevent.backend.dto.UpdateProfileDTO;
+import com.helloevent.backend.exception.PasswordIncorrectException;
 import com.helloevent.backend.mapper.UserMapper;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.repository.UserRepository;
-import io.jsonwebtoken.Claims;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,22 +51,31 @@ public class UserService {
 
     }
 
-    public String verify ( User user ) {
+    public ResponseEntity<?> verify (User user ) {
+        try {
+            Authentication authentication = authenticationManager
+                    .authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    user.getUsername(),
+                                    user.getPassword()
+                            )
+                    );
 
-        Authentication authentication = authenticationManager
-                .authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                user.getUsername(),
-                                user.getPassword()
-                        )
-                );
+            if (authentication.isAuthenticated()){
+                AuthUserDTO authUser = this.getAuthenticatedUser(user.getUsername());
+                String token = jwtService.generateJwtToken(authUser);
 
-        if (authentication.isAuthenticated()){
-            AuthUserDTO authUser = this.getAuthenticatedUser(user.getUsername());
-            return jwtService.generateJwtToken(authUser);
+                Map<String, String> responseSuccess = new HashMap<>();
+                responseSuccess.put("token", token);
+
+                return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
+            }
+
+            throw  new PasswordIncorrectException("Invalid credentials");
         }
-
-        return "Fails";
+        catch (AuthenticationException e ) {
+            throw  new PasswordIncorrectException("Invalid credentials");
+        }
     }
 
     public List<User> showAllClients (String token) {
