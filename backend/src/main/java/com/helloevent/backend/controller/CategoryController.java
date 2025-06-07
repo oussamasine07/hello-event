@@ -1,7 +1,9 @@
 package com.helloevent.backend.controller;
 
+import com.helloevent.backend.dto.CategoryDTO;
 import com.helloevent.backend.model.Category;
 import com.helloevent.backend.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,11 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category create (@RequestBody Category category, @RequestHeader("Authorization") String token) {
-        return categoryService.createCategory(category, token);
+    public Category create (@Valid @RequestBody CategoryDTO category, @RequestHeader("Authorization") String token) {
+        Category newCategory = new Category();
+        newCategory.setName(category.name());
+
+        return categoryService.createCategory(newCategory, token);
     }
 
     @PutMapping("/{id}")

@@ -9,8 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +26,10 @@ class CategoryServiceTest {
 
     @Test
     void getAllCategories() {
-        Category category = new Category();
+        Category category = new Category(category.name());
         category.setName("one category");
 
-        Category category1 = new Category();
+        Category category1 = new Category(category.name());
         category1.setName("an other category");
 
         List<Category> categories = Arrays.asList(category, category1);
@@ -45,7 +43,7 @@ class CategoryServiceTest {
 
     @Test
     void getCategoryById() {
-        Category category = new Category();
+        Category category = new Category(category.name());
         category.setId(1L);
         category.setName("category 1");
 
@@ -58,7 +56,7 @@ class CategoryServiceTest {
 
     @Test
     void createCategory() {
-        Category category = new Category();
+        Category category = new Category(category.name());
         category.setName("category 1");
 
         Mockito.when(categoryRepository.save(category)).thenReturn(category);

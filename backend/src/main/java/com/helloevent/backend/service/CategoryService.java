@@ -1,5 +1,6 @@
 package com.helloevent.backend.service;
 
+import com.helloevent.backend.dto.CategoryDTO;
 import com.helloevent.backend.model.Category;
 import com.helloevent.backend.model.Role;
 import com.helloevent.backend.model.User;
@@ -36,7 +37,7 @@ public class CategoryService {
         return categoryRepository.findById(id).orElseThrow();
     }
 
-    public Category createCategory ( Category category, String token) {
+    public Category createCategory (Category category, String token) {
         String usernameFromToken = jwtService.extarctUsername(token.substring(7));
         User user = userRepository.getUserByUsernameOrByEmail(usernameFromToken);
 

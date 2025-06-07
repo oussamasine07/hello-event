@@ -1,6 +1,7 @@
 package com.helloevent.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 
-    public Category () {}
+
+    public Category() {
+
+    }
 
     public Long getId() {
         return id;
@@ -35,5 +39,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", events=" + events +
+                '}';
     }
 }
