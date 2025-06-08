@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, Observable, Subject, throwError} from 'rxjs';
 import {Category} from '../../models/interfaces/category';
 import {CategoryFormType} from '../../models/types/CategoryForm-type';
 
@@ -35,9 +35,17 @@ export class CategoryService {
     }
     switch (requestBody.type) {
       case "create":
-        return this.httpClient.post<Category>("http://localhost:8080/categories", body)
+        return this.httpClient.post<Category>("http://localhost:8080/categories", body).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return throwError(() => err)
+          })
+        );
       case "update":
-        return this.httpClient.put<Category>(`http://localhost:8080/categories/${requestBody.category.id}`, body)
+        return this.httpClient.put<Category>(`http://localhost:8080/categories/${requestBody.category.id}`, body).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return throwError(() => err)
+          })
+        );
     }
 
   }

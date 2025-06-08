@@ -4,11 +4,22 @@
   </mat-card-header>
   <mat-card-content>
     <form class="category-form" #formCategory="ngForm" (ngSubmit)="onSubmitCategory(formCategory)" >
-      <mat-form-field appearance="outline">
-        <mat-label>Category Name</mat-label>
+      <mat-form-field appearance="outline"
+                      class="full-width">
+<!--                      [class.mat-form-field-invalid]="fieldErrors['name']">-->
+        <mat-label>Name</mat-label>
         <input hidden type="number" name="id" [(ngModel)]="currentCategory.category.id">
         <input hidden type="text" name="type" [(ngModel)]="currentCategory.type">
-        <input matInput placeholder="Enter category name" name="name" [(ngModel)]="currentCategory.category.name" >
+        <input matInput
+               type="text"
+               name="name"
+               required
+               #name="ngModel"
+               [(ngModel)]="currentCategory.category.name"
+               (ngModelChange)="clearFieldError('name')">
+        <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['name']">
+          {{ fieldErrors['name'] }}
+        </mat-hint>
       </mat-form-field>
       <div class="form-actions">
         <button mat-raised-button color="primary" type="submit">Save Category</button>
