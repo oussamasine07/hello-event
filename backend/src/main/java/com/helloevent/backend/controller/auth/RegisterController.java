@@ -3,6 +3,7 @@ package com.helloevent.backend.controller.auth;
 import com.helloevent.backend.dto.RegisterDTO;
 import com.helloevent.backend.model.User;
 import com.helloevent.backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public User registerUser (@RequestBody RegisterDTO userDTO) {
+    public User registerUser (@Valid @RequestBody RegisterDTO userDTO) {
         User user = new User();
 
         user.setFirstName(userDTO.first_name());

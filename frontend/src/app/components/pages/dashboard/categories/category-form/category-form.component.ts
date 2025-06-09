@@ -30,6 +30,8 @@ export class CategoryFormComponent {
 
   categoryServcie = inject(CategoryService);
 
+  fieldErrors: Record<string, string|string[]> = {};
+
   @Input() currentCategory: CategoryFormType = {
     type: "create",
     category: {
@@ -40,16 +42,11 @@ export class CategoryFormComponent {
 
   onSubmitCategory ( form: NgForm ) {
 
-    //console.log(this.currentCategory)
-
-
     this.categoryServcie.postOrUpdateCategory(this.currentCategory).subscribe({
       next: ( createdCategory: Category ) => {
-
         if (this.currentCategory.type == "create") {
           this.categoryEventEmitter.emit( createdCategory );
         }
-
         this.currentCategory = {
           type: "create",
           category: {
@@ -57,10 +54,12 @@ export class CategoryFormComponent {
             name: ""
           }
         }
+      },
+      error: (err) => {
+        this.fieldErrors = err.error;
+        console.log(this.fieldErrors)
       }
     })
-
-
 
   }
 
@@ -75,6 +74,12 @@ export class CategoryFormComponent {
     }
 
     this.cancelCurrentCategory.emit(currentcategory)
+  }
+
+  clearFieldError(field: string): void {
+    if (this.fieldErrors[field]) {
+      delete this.fieldErrors[field];
+    }
   }
 
 }

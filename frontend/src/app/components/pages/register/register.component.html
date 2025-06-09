@@ -6,56 +6,192 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form class="register-form" #registerForm (ngSubmit)="onRegisterSubmit(registerForm)" >
+      <form class="register-form" #registerForm="ngForm" (ngSubmit)="onRegisterSubmit( registerForm )">
         <div class="name-fields">
-          <mat-form-field appearance="outline">
+          <!-- First Name -->
+          <mat-form-field appearance="outline"
+                          [class.mat-form-field-invalid]="registerErrors['first_name']">
             <mat-label>First Name</mat-label>
-            <input matInput placeholder="Enter your first name" name="first_name" [(ngModel)]="registerFormObj.first_name">
+            <input matInput placeholder="Enter your first name"
+                   name="first_name"
+                   required
+                   #firstName="ngModel"
+                   [(ngModel)]="registerFormObj.first_name"
+                   (ngModelChange)="clearFieldError('first_name')">
             <mat-icon matPrefix>person</mat-icon>
+            <mat-hint align="start" class="mat-error" *ngIf="registerErrors['first_name']">
+              {{ registerErrors['first_name'] }}
+            </mat-hint>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- Last Name -->
+          <mat-form-field appearance="outline"
+                          [class.mat-form-field-invalid]="registerErrors['last_name']">
             <mat-label>Last Name</mat-label>
-            <input matInput placeholder="Enter your last name" name="last_name" [(ngModel)]="registerFormObj.last_name">
+            <input matInput placeholder="Enter your last name"
+                   name="last_name"
+                   required
+                   #lastName="ngModel"
+                   [(ngModel)]="registerFormObj.last_name"
+                   (ngModelChange)="clearFieldError('last_name')">
             <mat-icon matPrefix>person</mat-icon>
+            <mat-hint align="start" class="mat-error" *ngIf="registerErrors['last_name']">
+              {{ registerErrors['last_name'] }}
+            </mat-hint>
           </mat-form-field>
         </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput type="text" placeholder="Enter your username" name="username" [(ngModel)]="registerFormObj.username">
-          <mat-icon matPrefix>person</mat-icon>
-        </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Email -->
+        <mat-form-field appearance="outline"
+                        [class.mat-form-field-invalid]="registerErrors['email']">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email" name="email" [(ngModel)]="registerFormObj.email">
+          <input matInput type="email"
+                 placeholder="Enter your email"
+                 name="email"
+                 required
+                 #email="ngModel"
+                 [(ngModel)]="registerFormObj.email"
+                 (ngModelChange)="clearFieldError('email')">
           <mat-icon matPrefix>email</mat-icon>
+          <mat-hint align="start" class="mat-error" *ngIf="registerErrors['email']">
+            {{ registerErrors['email'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Username -->
+        <mat-form-field appearance="outline"
+                        class="full-width"
+                        [class.mat-form-field-invalid]="registerErrors['username']">
+          <mat-label>Username</mat-label>
+          <input matInput
+                 type="text"
+                 name="username"
+                 required
+                 #username="ngModel"
+                 [(ngModel)]="registerFormObj.username"
+                 (ngModelChange)="clearFieldError('username')">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-hint align="start" class="mat-error" *ngIf="registerErrors['username']">
+            {{ registerErrors['username'] }}
+          </mat-hint>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline"
+                        [class.mat-form-field-invalid]="registerErrors['password']">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="registerFormObj.password">
+          <input matInput
+                 [type]="hidePassword ? 'password' : 'text'"
+                 name="password"
+                 required
+                 #password="ngModel"
+                 [(ngModel)]="registerFormObj.password"
+                 (ngModelChange)="clearFieldError('password')">
           <mat-icon matPrefix>lock</mat-icon>
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
+          <mat-hint align="start" class="mat-error" *ngIf="registerErrors['password']">
+            {{ registerErrors['password'] }}
+          </mat-hint>
         </mat-form-field>
+
+        <!-- Confirm Password -->
+        <mat-form-field appearance="outline"
+                        [class.mat-form-field-invalid]="registerErrors['confirmPassword']">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput
+                 [type]="hideConfirmPassword ? 'password' : 'text'"
+                 name="confirmPassword"
+                 required
+                 #confirmPassword="ngModel"
+                 [(ngModel)]="registerFormObj.confirmPassword"
+                 (ngModelChange)="clearFieldError('confirmPassword')">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
+            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-hint align="start" class="mat-error" *ngIf="registerErrors['confirmPassword']">
+            {{ registerErrors['confirmPassword'] }}
+          </mat-hint>
+        </mat-form-field>
+
+        <!--        <div class="name-fields">-->
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>First Name</mat-label>-->
+<!--            <input matInput placeholder="Enter your first name" name="first_name" required #firstName="ngModel" [(ngModel)]="registerFormObj.first_name">-->
+<!--            <mat-icon matPrefix>person</mat-icon>-->
+<!--            <mat-error *ngIf="registerErrors['first_name']">-->
+<!--              {{ registerErrors["first_name"] }}-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
+
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>Last Name</mat-label>-->
+<!--            <input matInput placeholder="Enter your last name" name="last_name" required #lastName="ngModel" [(ngModel)]="registerFormObj.last_name">-->
+<!--            <mat-icon matPrefix>person</mat-icon>-->
+<!--            <mat-error *ngIf="registerErrors['last_name']">-->
+<!--              {{ registerErrors["last_name"] }}-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Email</mat-label>-->
+<!--          <input matInput type="email" placeholder="Enter your email" name="email" required #email="ngModel" [(ngModel)]="registerFormObj.email">-->
+<!--          <mat-icon matPrefix>email</mat-icon>-->
+<!--          <mat-error *ngIf="registerErrors['email']">-->
+<!--            {{ registerErrors["email"] }}-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field-->
+<!--          appearance="outline"-->
+<!--          class="full-width"-->
+<!--          [class.mat-form-field-invalid]="registerErrors['username']">-->
+<!--          <mat-label>Username</mat-label>-->
+<!--          <input  matInput-->
+<!--                  type="text"-->
+<!--                  name="username"-->
+<!--                  required-->
+<!--                  #username="ngModel"-->
+<!--                  [(ngModel)]="registerFormObj.username"-->
+<!--                  (ngModelChange)="clearFieldError('username')">-->
+<!--          <mat-icon matPrefix>person</mat-icon>-->
+
+<!--          <mat-hint align="start"-->
+<!--                    class="mat-error"-->
+<!--                    *ngIf="registerErrors['username']">-->
+<!--            {{ registerErrors['username'] }}-->
+<!--          </mat-hint>-->
+<!--        </mat-form-field>-->
+
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Password</mat-label>-->
+<!--          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" required #password="ngModel" [(ngModel)]="registerFormObj.password">-->
+<!--          <mat-icon matPrefix>lock</mat-icon>-->
+<!--          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">-->
+<!--            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>-->
+<!--          </button>-->
+<!--          <mat-error *ngIf="registerErrors['password']">-->
+<!--            {{ registerErrors["password"] }}-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
 
 <!--        <mat-form-field appearance="outline">-->
 <!--          <mat-label>Confirm Password</mat-label>-->
-<!--          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'">-->
+<!--          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" name="confirmPassword" required #confirmPassword="ngModel" [(ngModel)]="registerFormObj.confirmPassword">-->
 <!--          <mat-icon matPrefix>lock</mat-icon>-->
 <!--          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">-->
 <!--            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>-->
 <!--          </button>-->
+<!--          <mat-error *ngIf="registerErrors['confirmPassword']">-->
+<!--            {{ registerErrors["confirmPassword"] }}-->
+<!--          </mat-error>-->
 <!--        </mat-form-field>-->
 
-<!--        <div class="terms-section">-->
-<!--          <mat-checkbox color="primary">-->
-<!--            I accept the Terms and Conditions-->
-<!--          </mat-checkbox>-->
-<!--        </div>-->
 
         <button mat-raised-button color="primary" type="submit" class="submit-button">
           Create Account

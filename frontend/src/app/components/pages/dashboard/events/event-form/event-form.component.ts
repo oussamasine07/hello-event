@@ -43,6 +43,8 @@ export class EventFormComponent implements OnInit {
 
   router: Router = inject(Router)
 
+  fieldErrors: Record<string, string|string[]> = {};
+
   categories: Category[] = []
   ngOnInit() {
     this.categoryService.getAllCategories().subscribe({
@@ -79,26 +81,27 @@ export class EventFormComponent implements OnInit {
     this.eventService.postEvent(this.eventObj).subscribe({
       next: ( event: EventInterface ) => {
         this.eventService.addEvent( event )
+        this.eventObj = {
+          pageTitle: "Add new event",
+          type: "create",
+          event: {
+            id: null,
+            name: "",
+            description: "",
+            place: "",
+            eventDate: "",
+            numberOfPlaces: 0,
+            status: "",
+            category_id: ""
+          }
+        }
+
+        this.router.navigate(["/dashboard/events"])
+      },
+      error: (err) => {
+        this.fieldErrors = err.error;
       }
     })
-
-    this.eventObj = {
-      pageTitle: "Add new event",
-      type: "create",
-      event: {
-        id: null,
-        name: "",
-        description: "",
-        place: "",
-        eventDate: "",
-        numberOfPlaces: 0,
-        status: "",
-        category_id: ""
-      }
-    }
-
-    this.router.navigate(["/dashboard/events"])
-
   }
 
 
@@ -119,6 +122,13 @@ export class EventFormComponent implements OnInit {
     }
 
     this.router.navigate(["/dashboard/events"])
+  }
+
+  clearFieldError(field: string) {
+    // Re-assign a new object so Angular notices the change.
+    const lookNew = { ...this.fieldErrors };
+    delete lookNew[field];
+    this.fieldErrors = lookNew;
   }
 
 }

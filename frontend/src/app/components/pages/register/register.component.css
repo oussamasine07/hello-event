@@ -79,6 +79,18 @@ mat-form-field {
   margin: 0.5rem 0;
 }
 
+::ng-deep .mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline {
+  --mdc-outlined-text-field-outline-color: #f44336; /* Material Red 500 */
+}
+::ng-deep .mat-mdc-form-field.mat-form-field-invalid .mat-mdc-floating-label {
+  color: #f44336 !important;
+}
+
+.mat-error {
+  color: #f44336 !important;
+  font-size: 12px;
+}
+
 @media (max-width: 600px) {
   .register-card {
     padding: 1.5rem;
@@ -91,4 +103,38 @@ mat-form-field {
   .submit-button {
     width: 100%;
   }
+}
+
+.terms-error {
+  color: #f44336;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Style for invalid form fields */
+.ng-invalid.ng-touched:not(form) {
+  border-color: #f44336;
+}
+
+/* Style for disabled submit button */
+.submit-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Error message animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+mat-error {
+  animation: fadeIn 0.3s ease-in-out;
 }

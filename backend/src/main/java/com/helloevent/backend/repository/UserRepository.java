@@ -10,7 +10,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findUserByUsername(String username);
+    public User findUserByEmail(String email);
+    public User findUserByUsername(String username);
 
     @Query(value = "select * from users where username = ?1 or email = ?1", nativeQuery = true)
     User getUserByUsernameOrByEmail(String usernameOrEmail);

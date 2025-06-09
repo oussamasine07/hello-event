@@ -1,52 +1,185 @@
+<!--<mat-card class="event-form-card">-->
+<!--  <mat-card-header>-->
+<!--    <mat-card-title>{{ eventObj.pageTitle }}</mat-card-title>-->
+<!--  </mat-card-header>-->
+<!--  <mat-card-content>-->
+<!--    <form #eventForm class="event-form" (ngSubmit)="onEventSubmit(eventForm)" >-->
+<!--      <input type="hidden" name="id" [(ngModel)]="eventObj.event.id">-->
+<!--      <div class="form-grid">-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Event Name</mat-label>-->
+<!--          <input matInput placeholder="Enter event name" name="name" [(ngModel)]="eventObj.event.name">-->
+<!--        </mat-form-field>-->
+
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Date</mat-label>-->
+<!--          <input matInput [matDatepicker]="picker" name="eventDate" [(ngModel)]="eventObj.event.eventDate">-->
+<!--          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker></mat-datepicker>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Place</mat-label>-->
+<!--          <input matInput placeholder="Enter event location" name="place" [(ngModel)]="eventObj.event.place">-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Number of Places</mat-label>-->
+<!--          <input matInput type="number" placeholder="Enter number of available places" name="numberOfPlaces" [(ngModel)]="eventObj.event.numberOfPlaces">-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Category</mat-label>-->
+<!--          <mat-select name="category_id" [(ngModel)]="eventObj.event.category_id">-->
+<!--            <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Status</mat-label>-->
+<!--          <mat-select name="status" [(ngModel)]="eventObj.event.status">-->
+<!--            <mat-option value="OPENED" >Opened</mat-option>-->
+<!--            <mat-option value="CLOSED" >Closed</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--        <div class="full-width">-->
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>Description</mat-label>-->
+<!--            <textarea matInput placeholder="Enter event description" rows="4" name="description" [(ngModel)]="eventObj.event.description"></textarea>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-actions">-->
+<!--        <button mat-button color="warn" type="button" *ngIf="eventObj.type == 'update'" (click)="onCancelEditEventClick()">Cancel</button>-->
+<!--        <button mat-raised-button color="primary" type="submit">Save Event</button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </mat-card-content>-->
+<!--</mat-card>-->
+
 <mat-card class="event-form-card">
   <mat-card-header>
     <mat-card-title>{{ eventObj.pageTitle }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form #eventForm class="event-form" (ngSubmit)="onEventSubmit(eventForm)" >
+    <form #eventForm="ngForm" class="event-form" (ngSubmit)="onEventSubmit(eventForm)">
       <input type="hidden" name="id" [(ngModel)]="eventObj.event.id">
       <div class="form-grid">
-        <mat-form-field appearance="outline">
+
+        <!-- Event Name -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['name']">
           <mat-label>Event Name</mat-label>
-          <input matInput placeholder="Enter event name" name="name" [(ngModel)]="eventObj.event.name">
+          <input matInput
+                 placeholder="Enter event name"
+                 name="name"
+                 required
+                 #name="ngModel"
+                 [(ngModel)]="eventObj.event.name"
+                 (ngModelChange)="clearFieldError('name')">
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['name']">
+            {{ fieldErrors['name'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Date -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['eventDate']">
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker" name="eventDate" [(ngModel)]="eventObj.event.eventDate">
+          <input matInput
+                 [matDatepicker]="picker"
+                 name="eventDate"
+                 required
+                 #eventDate="ngModel"
+                 [(ngModel)]="eventObj.event.eventDate"
+                 (ngModelChange)="clearFieldError('eventDate')">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['eventDate']">
+            {{ fieldErrors['eventDate'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Place -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['place']">
           <mat-label>Place</mat-label>
-          <input matInput placeholder="Enter event location" name="place" [(ngModel)]="eventObj.event.place">
+          <input matInput
+                 placeholder="Enter event location"
+                 name="place"
+                 required
+                 #place="ngModel"
+                 [(ngModel)]="eventObj.event.place"
+                 (ngModelChange)="clearFieldError('place')">
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['place']">
+            {{ fieldErrors['place'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Number of Places -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['numberOfPlaces']">
           <mat-label>Number of Places</mat-label>
-          <input matInput type="number" placeholder="Enter number of available places" name="numberOfPlaces" [(ngModel)]="eventObj.event.numberOfPlaces">
+          <input matInput
+                 type="number"
+                 placeholder="Enter number of available places"
+                 name="numberOfPlaces"
+                 required
+                 #numberOfPlaces="ngModel"
+                 [(ngModel)]="eventObj.event.numberOfPlaces"
+                 (ngModelChange)="clearFieldError('numberOfPlaces')">
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['numberOfPlaces']">
+            {{ fieldErrors['numberOfPlaces'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Category -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['category_id']">
           <mat-label>Category</mat-label>
-          <mat-select name="category_id" [(ngModel)]="eventObj.event.category_id">
-            <mat-option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</mat-option>
+          <mat-select name="category_id"
+                      required
+                      #category_id="ngModel"
+                      [(ngModel)]="eventObj.event.category_id"
+                      (ngModelChange)="clearFieldError('category_id')">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
           </mat-select>
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['category_id']">
+            {{ fieldErrors['category_id'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Status -->
+        <mat-form-field appearance="outline" [class.mat-form-field-invalid]="fieldErrors['status']">
           <mat-label>Status</mat-label>
-          <mat-select name="status" [(ngModel)]="eventObj.event.status">
-            <mat-option value="OPENED" >Opened</mat-option>
-            <mat-option value="CLOSED" >Closed</mat-option>
+          <mat-select name="status"
+                      required
+                      #status="ngModel"
+                      [(ngModel)]="eventObj.event.status"
+                      (ngModelChange)="clearFieldError('status')">
+            <mat-option value="OPENED">Opened</mat-option>
+            <mat-option value="CLOSED">Closed</mat-option>
           </mat-select>
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['status']">
+            {{ fieldErrors['status'] }}
+          </mat-hint>
         </mat-form-field>
 
+        <!-- Description -->
         <div class="full-width">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="full-width" [class.mat-form-field-invalid]="fieldErrors['description']">
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Enter event description" rows="4" name="description" [(ngModel)]="eventObj.event.description"></textarea>
+            <textarea matInput
+                      placeholder="Enter event description"
+                      rows="4"
+                      name="description"
+                      required
+                      #description="ngModel"
+                      [(ngModel)]="eventObj.event.description"
+                      (ngModelChange)="clearFieldError('description')"></textarea>
+            <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['description']">
+              {{ fieldErrors['description'] }}
+            </mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -58,3 +191,4 @@
     </form>
   </mat-card-content>
 </mat-card>
+

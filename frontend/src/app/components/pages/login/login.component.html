@@ -8,20 +8,55 @@
 
     <mat-card-content>
       <form class="login-form" #loginForm (ngSubmit)="onLoginFormSubmit(loginFormObj)">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput type="text" placeholder="Enter your email" name="username" [(ngModel)]="loginFormObj.username" >
-          <mat-icon matPrefix>email</mat-icon>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Email</mat-label>-->
+<!--          <input matInput type="text" placeholder="Enter your email" name="username" [(ngModel)]="loginFormObj.username" >-->
+<!--          <mat-icon matPrefix>email</mat-icon>-->
+
+<!--        </mat-form-field>-->
+
+        <mat-form-field appearance="outline"
+                        class="full-width"
+                        [class.mat-form-field-invalid]="fieldErrors['username']">
+          <mat-label>Username</mat-label>
+          <input matInput
+                 type="text"
+                 name="username"
+                 required
+                 #username="ngModel"
+                 [(ngModel)]="loginFormObj.username"
+                 (ngModelChange)="clearFieldError('username')">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['username']">
+            {{ fieldErrors['username'] }}
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline"
+                        class="full-width"
+                        [class.mat-form-field-invalid]="fieldErrors['password']">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="loginFormObj.password" >
+          <input matInput
+                 type="text"
+                 name="password"
+                 required
+                 #password="ngModel"
+                 [(ngModel)]="loginFormObj.password"
+                 (ngModelChange)="clearFieldError('password')">
           <mat-icon matPrefix>lock</mat-icon>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
+          <mat-hint align="start" class="mat-error" *ngIf="fieldErrors['password']">
+            {{ fieldErrors['password'] }}
+          </mat-hint>
         </mat-form-field>
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Password</mat-label>-->
+<!--          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="loginFormObj.password" >-->
+<!--          <mat-icon matPrefix>lock</mat-icon>-->
+<!--          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">-->
+<!--            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-form-field>-->
 
         <div class="form-actions">
           <a mat-button color="primary">Forgot Password?</a>

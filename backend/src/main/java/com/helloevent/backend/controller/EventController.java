@@ -3,6 +3,7 @@ package com.helloevent.backend.controller;
 import com.helloevent.backend.dto.EventDTO;
 import com.helloevent.backend.model.Event;
 import com.helloevent.backend.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class EventController {
     }
 
     @PostMapping
-    public Event create (@RequestBody EventDTO event, @RequestHeader("Authorization") String token) {
+    public Event create (@Valid @RequestBody EventDTO event, @RequestHeader("Authorization") String token) {
         return eventService.createNewEvent(event, token);
     }
 
