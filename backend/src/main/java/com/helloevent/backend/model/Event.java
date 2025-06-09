@@ -118,4 +118,17 @@ public class Event {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", place='" + place + '\'' +
+                ", eventDate=" + eventDate +
+                ", numberOfPlaces=" + numberOfPlaces +
+                ", status=" + status +
+                '}';
+    }
 }

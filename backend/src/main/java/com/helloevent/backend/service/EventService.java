@@ -1,10 +1,7 @@
 package com.helloevent.backend.service;
 
 import com.helloevent.backend.dto.EventDTO;
-import com.helloevent.backend.model.Category;
-import com.helloevent.backend.model.Event;
-import com.helloevent.backend.model.Role;
-import com.helloevent.backend.model.User;
+import com.helloevent.backend.model.*;
 import com.helloevent.backend.repository.EventRepository;
 import com.helloevent.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -66,6 +63,8 @@ public class EventService {
             newEvent.setUser(user);
             newEvent.setStatus(event.status());
             newEvent.setCategory(category);
+
+            System.out.println(newEvent.toString());
 
             return eventRepository.save(newEvent);
 
