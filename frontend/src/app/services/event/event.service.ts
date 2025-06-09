@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {BehaviorSubject, catchError, Observable, Subject, throwError} from 'rxjs';
 import { EventInterface } from '../../models/interfaces/event'
 import {EventForm} from '../../models/types/EventForm-type';
 
@@ -51,11 +51,18 @@ export class EventService {
   postEvent (requestBody: EventForm ): Observable<EventInterface> {
     switch (requestBody.type) {
       case "create":
-        return this.httpClient.post<EventInterface>("http://localhost:8080/events", requestBody.event)
+        return this.httpClient.post<EventInterface>("http://localhost:8080/events", requestBody.event).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return throwError(() => err )
+          })
+        )
         break;
       case "update":
-        console.log("updating this event")
-        return this.httpClient.put<EventInterface>(`http://localhost:8080/events/${requestBody.event.id}`, requestBody.event)
+        return this.httpClient.put<EventInterface>(`http://localhost:8080/events/${requestBody.event.id}`, requestBody.event).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return throwError(() => err )
+          })
+        )
         break;
     }
 
